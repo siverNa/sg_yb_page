@@ -8,11 +8,13 @@
 		<a href="./main.html">main page로 돌아가기</a>
 		<h1>회원가입(signup)</h1>
 		<h2>이 페이지는 회원가입 페이지입니다</h2>
-		<form action="../php/signup_process.php" method="post">
-			<p>아이디 : <input type="text" name="user_id" required></p>
+		<form action="../php/signup_process.php?mode=signup" method="post">
+			<p>아이디 : <input type="text" name="user_id" required>
+				<input type="button" value="중복확인"></p>
 			<p>비밀번호 : <input type="password" name="user_password" required></p>
 			<p>비밀번호 확인 : <input type="password" name="user_password_confirm" required></p>
-			<p><input type="submit" value="회원가입(signup)"></p>
+			<p><input type="submit" value="회원가입(signup)">
+				<button onclick="history.back(-1)">취소</button></p>
 		</form>
 	</body>
 </html>
