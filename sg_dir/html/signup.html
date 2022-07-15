@@ -3,14 +3,23 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 		<meta name = "viewport" content="width=device-width, initial-scale=1.0">
 		<title>signup page</title>
+		<script>
+			//아이디 중복 체크용 새창 띄우기
+			function checkid()
+			{
+				window.open("../php/check_id.php?userid=" + document.signup.user_id.value,"IDcheck",
+							"left=50, top=50, width=300, height=300, scrollbar=no, resizeable=no");
+			}
+		</script>
 	</head>
 	<body>
 		<a href="./main.html">main page로 돌아가기</a>
 		<h1>회원가입(signup)</h1>
 		<h2>이 페이지는 회원가입 페이지입니다</h2>
-		<form action="../php/signup_process.php?mode=signup" method="post">
+		<form action="../php/signup_process.php?mode=signup" method="post" name="signup">
+			<!-- <input type="hidden" name="hidden_id" value="signup"> -->
 			<p>아이디 : <input type="text" name="user_id" required>
-				<input type="button" value="중복확인"></p>
+				<input type="button" value="중복확인" onclick="checkid()"></p>
 			<p>비밀번호 : <input type="password" name="user_password" required></p>
 			<p>비밀번호 확인 : <input type="password" name="user_password_confirm" required></p>
 			<p><input type="submit" value="회원가입(signup)">
