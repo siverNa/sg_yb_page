@@ -18,16 +18,25 @@
 		$count = mysqli_num_rows($result);
 		if ($count < 1)
 		{
+			//echo "
+			//	<p>사용할 수 있는 아이디입니다.</p>
+			//	<center><input type=button value=창닫기 onclick='self.close()'></center>
+			//";
 			echo "
-				<p>사용할 수 있는 아이디입니다.</p>
-				<center><input type=button value=창닫기 onclick='self.close()'></center>
+				<span style='color:blue;'>$userid</span> 는 사용가능한 아이디입니다.
+				<p><input type='button' value='이 ID를 사용' onclick='opener.parent.decide(); window.close();'></p>
 			";
+
 		}
 		else
 		{
+			//echo "
+			//	<p>이미 존재하는 아이디입니다.</p>
+			//	<center><input type=button value=창닫기 onclick='self.close()'></center>
+			//";
 			echo "
-				<p>이미 존재하는 아이디입니다.</p>
-				<center><input type=button value=창닫기 onclick='self.close()'></center>
+				<span style='color:red;'>$userid</span> 는 이미 존재하는 아이디입니다.
+				<p><input type='button' value='다른 ID를 사용' onclick='opener.parent.change(); window.close();'></p>
 			";
 		}
 	}

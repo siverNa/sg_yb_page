@@ -14,7 +14,7 @@
 	switch($_GET['mode'])
 	{
 		case 'signup' :
-			$user_id = $_POST['user_id'];
+			$user_id = $_POST['decide_id'];
 			$user_password = $_POST['user_password'];
 			$user_password_confirm = $_POST['user_password_confirm'];
 			
