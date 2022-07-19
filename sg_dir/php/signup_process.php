@@ -23,9 +23,15 @@
 				errPwMsg("비밀번호가 일치하지 않습니다.");
 			else
 			{
+				/*
+					password_hash():단방향 알고리즘(복호화 불가)
+					로그인시, password_verify() 로 비교해 일치하는 지 확인
+				*/
+				$encrypt_password = password_hash($user_password, PASSWORD_DEFAULT);
+
 				$sql = "
 				INSERT INTO member (user_id, user_password)
-				VALUES ('$user_id', '$user_password');";
+				VALUES ('$user_id', '$encrypt_password');";
 			
 				$result = mysqli_query($connect, $sql);
 				if ($result === false)
