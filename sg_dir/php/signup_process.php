@@ -1,4 +1,6 @@
 <?php
+	session_start();
+
 	function errPwMsg($msg) {
 		echo "
 			<script>
@@ -39,6 +41,56 @@
 				
 				header('Location: ../html/signup_ok.html');
 			}
+		break;
+		case 'login' :
+			$user_id = $_POST['user_id'];
+			$user_password = $_POST['user_password'];
+			
+			$sql = "
+				SELECT * FROM member WHERE user_id = '$user_id';
+			";
+			$res = mysqli_fetch_array(mysqli_query($connect, $sql));
+
+			if (!$user_id)
+			{	
+				errPwMsg("아이디를 입력해주세요.");
+				echo "<script>window.location.replace('../html/login.html');</script>";
+			}
+			else if (!$user_password)
+			{
+				errPwMsg("비밀번호를 입력해주세요.");
+				echo "<script>window.location.replace('../html/login.html');</script>";
+			}
+			else if (!isset($res['user_id']))
+			{
+				errPwMsg("존재하지 않는 아이디입니다.");
+				echo "<script>window.location.replace('../html/login.html');</script>";
+			}
+			else if (password_verify($user_password, $res['user_password']))
+			{
+				errPwMsg("비밀번호가 일치하지 않습니다.");
+				echo "<script>window.location.replace('../html/login.html');</script>";
+			}
+
+			if (!isset($res))
+			{
+				errPwMsg("로그인 중 에러가 발생했습니다. 관리자에게 문의하십시오.");
+				echo "<script>window.location.replace('../html/login.html');</script>";
+			}
+			else
+			{
+				$_SESSION['user_id'] = $res['user_id'];
+
+				echo "<script>alert('로그인에 성공했습니다!');<script>";
+				header('Location: ../html/main.php');
+			}
+			
+		break;
+		case 'logout' :
+			session_start();
+			session_unset();
+			session_destroy();
+			header('Location: ../html/main.php');
 		break;
 	}
 
