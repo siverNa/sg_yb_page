@@ -13,7 +13,7 @@
 	<title>게시글 작성</title>
 </head>
 <body>
-	<p>
+	<header>
 	<?php
 		if (!isset($_SESSION['user_id']))
 		{
@@ -28,10 +28,15 @@
 			</div>';
 		}
 	?>
-	</p>
+	</header>
 	<h2>글 작성</h2>
-	<form action="" method="post">
-		
+	<form action="../php/board_process.php?mode=write" method="post">
+		<input type="hidden" name="id" value="board">
+		<input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
+		<p><input type="text" name="title" placeholder="제목" required></p>
+		<textarea name="stoty" cols="500" rows="500" placeholder="본문" required></textarea>
+		<input type="submit" value="글쓰기">&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" value="취소" onclick="history.back(1)">
 	</form>
 </body>
 </html>
