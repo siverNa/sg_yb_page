@@ -1,6 +1,11 @@
 <?php
 	require_once('../php/db_con.php');
 	session_start();
+
+	$sql = "
+		SELECT * FROM board ORDER BY num DESC
+	";
+	$result = mysqli_query($connect, $sql);
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -42,6 +47,18 @@
 				<th width=70>추천</th>
 			</tr>
 		</thead>
+		<?php while ($row = mysqli_fetch_array($result)) { ?>
+			<tbody>
+				<tr>
+					<td><?php echo $row['num']; ?></td>
+                    <td><a href="view.php?id=<?=$row['id']?>"><?php echo $row['title']; ?></a></td>
+                    <td><?php echo $row['user_id']; ?></td>
+                    <td><?php echo $row['written']; ?></td>
+                    <td><?php echo $row['hit']; ?></td>
+                    <td><?php echo $row['liked']; ?></td>
+				</tr>
+			</tbody>
+		<?php } ?>
 	</table>
 </body>
 </html>
