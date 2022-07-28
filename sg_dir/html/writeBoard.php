@@ -31,7 +31,7 @@
 	</header>
 	<h2>글 작성</h2>
 	<form action="../php/board_process.php?mode=write" method="post">
-		<input type="hidden" name="id" value="board">
+		<input type="hidden" name="type" value="board">
 		<input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
 		<p><input type="text" name="title" placeholder="제목" required></p>
 		<textarea name="content" cols="500" rows="500" placeholder="본문" required></textarea>

@@ -9,13 +9,13 @@
 				errPwMsg("로그인을 먼저 해주십시오.");
 			else
 			{
-				$id = $_POST['id'];
+				$type = $_POST['type'];
 				$user_id = $_POST['user_id'];
 				$title = $_POST['title'];
 				$content = $_POST['content'];
 
 				$sql = "
-					INSERT INTO board(id, user_id, title, content, written, hit, liked)
+					INSERT INTO board(type, user_id, title, content, written, hit, liked)
 					VALUES ('$id', '$user_id', '$title', '$content', now(), 0, 0);
 				";
 				$result = mysqli_query($connect, $sql);
