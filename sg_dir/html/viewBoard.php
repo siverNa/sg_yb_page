@@ -38,5 +38,16 @@
 			}
 		?>
 	</header>
+	<section>
+		<div><?= $row['title'] ?></div>
+		<div>
+			<div><?= $row['user_id'] ?></div>
+			<div><?= $row['written'] ?></div>
+		</div>
+		<div>
+			<?= $row['content'] ?>
+		</div>
+		<div><a href="./BoardList.php">목록으로</a></div>
+	</section>
 </body>
 </html>
