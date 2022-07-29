@@ -60,5 +60,6 @@
 			</tbody>
 		<?php } ?>
 	</table>
+	<div><a href="./writeBoard.php">글쓰기</a></div>
 </body>
 </html>
