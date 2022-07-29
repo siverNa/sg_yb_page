@@ -51,7 +51,7 @@
 			<tbody>
 				<tr>
 					<td><?php echo $row['num']; ?></td>
-                    <td><a href="view.php?id=<?=$row['id']?>"><?php echo $row['title']; ?></a></td>
+                    <td><a href="viewBoard.php?num=<?=$row['num']?>"><?php echo $row['title']; ?></a></td>
                     <td><?php echo $row['user_id']; ?></td>
                     <td><?php echo $row['written']; ?></td>
                     <td><?php echo $row['hit']; ?></td>
