@@ -24,5 +24,6 @@
 			}
 		?>
 		<p>이 페이지는 main page 입니다</p>
+		<p><a href="./BoardList.php">게시판으로 이동</a></p>
 	</body>
 </html>

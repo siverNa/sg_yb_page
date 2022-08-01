@@ -1,8 +1,18 @@
 <?php
+	function errMsg($msg) {
+		echo "
+			<script>
+				window.alert('$msg');
+				history.back(1);
+			</script>
+		";
+		exit;
+	}
+	
 	require_once('../php/db_con.php');
 	session_start();
 	if (!$_SESSION['user_id'])
-		errPwMsg("로그인 후 작성할 수 있습니다.");
+		errMsg("로그인 후 작성할 수 있습니다.");
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -31,10 +41,10 @@
 	</header>
 	<h2>글 작성</h2>
 	<form action="../php/board_process.php?mode=write" method="post">
-		<input type="hidden" name="type" value="board">
+		<!--<input type="hidden" name="type" value="board">-->
 		<input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
 		<p><input type="text" name="title" placeholder="제목" required></p>
-		<textarea name="content" cols="500" rows="500" placeholder="본문" required></textarea>
+		<textarea name="content" cols="100" rows="50" placeholder="본문" required></textarea>
 		<input type="submit" value="글쓰기">&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type="button" value="취소" onclick="history.back(1)">
 	</form>
