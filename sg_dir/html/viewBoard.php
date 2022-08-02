@@ -48,6 +48,17 @@
 			<?= $row['content'] ?>
 		</div>
 		<div><a href="./BoardList.php">목록으로</a></div>
+		<?php
+			if ($row['user_id'] != $_SESSION['user_id'])
+			{}
+			else
+			{
+		?>
+			<div>
+				<a href="./updateBoard.php?num=<?= $row['num'] ?>">수정</a>
+				<a href="../php/board_process.php?mode=delete">삭제</a>
+			</div>
+		<?php } ?>
 	</section>
 </body>
 </html>
