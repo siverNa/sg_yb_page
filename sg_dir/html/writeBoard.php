@@ -1,18 +1,8 @@
-<?php
-	function errMsg($msg) {
-		echo "
-			<script>
-				window.alert('$msg');
-				history.back(1);
-			</script>
-		";
-		exit;
-	}
-	
+<?php	
 	require_once('../php/db_con.php');
 	session_start();
 	if (!$_SESSION['user_id'])
-		errMsg("로그인 후 작성할 수 있습니다.");
+		errPwMsg("로그인 후 작성할 수 있습니다.");
 ?>
 <!DOCTYPE html>
 <html lang="ko">

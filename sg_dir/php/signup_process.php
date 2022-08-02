@@ -1,16 +1,6 @@
 <?php
 	session_start();
 
-	function errPwMsg($msg) {
-		echo "
-			<script>
-				window.alert('$msg');
-				history.back(1);
-			</script>
-		";
-		exit;
-	}
-
 	require_once('./db_con.php');
 
 	switch($_GET['mode'])
