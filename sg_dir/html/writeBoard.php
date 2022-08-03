@@ -35,8 +35,10 @@
 		<input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
 		<p><input type="text" name="title" placeholder="제목" required></p>
 		<textarea name="content" cols="100" rows="50" placeholder="본문" required></textarea>
-		<input type="submit" value="글쓰기">&nbsp;&nbsp;&nbsp;&nbsp;
-		<input type="button" value="취소" onclick="history.back(1)">
+		<div>
+			<input type="submit" value="글쓰기">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" value="취소" onclick="history.back(1)">
+		</div>
 	</form>
 </body>
 </html>
