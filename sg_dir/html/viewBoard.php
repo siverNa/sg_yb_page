@@ -15,6 +15,16 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script>
+		function confirm_delete(text)
+		{
+			const selValue = confirm(text);
+			if (selValue == true)
+				location.href = "../php/board_process.php?mode=delete&num=<?= $row['num'] ?>";
+			else if (selValue == false)
+				history.back(1);
+		}
+	</script>
 	<title>게시글 목록</title>
 </head>
 <body>
@@ -56,7 +66,7 @@
 		?>
 			<div>
 				<a href="./updateBoard.php?num=<?= $row['num'] ?>">수정</a>
-				<a href="../php/board_process.php?mode=delete">삭제</a>
+				<a href="#" onclick="confirm_delete('정말로 삭제하시겠습니까?')">삭제</a>
 			</div>
 		<?php } ?>
 	</section>
