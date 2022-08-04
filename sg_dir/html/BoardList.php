@@ -10,6 +10,24 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+	<!-- select 태그 option 값에 따라 placeholder 를 다르게하는 함수 -->
+	<script>
+		function info()
+		{
+			var opt = document.getElementById("search_opt");
+			var opt_val = opt.options[opt.selectedIndex].value;//option의 value 값을 가져옴
+			var info = "";
+
+			if (opt_val == 'title')
+				info = "제목을 입력해주세요."
+			else if (opt_val == 'content')
+				info = "내용을 입력해주세요."
+			else if (opt_val == 'written')
+				info = "작성자를 입력해주세요."
+			
+			document.getElementById("search_box").placeholder = info;
+		}
+	</script>
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,5 +79,19 @@
 		<?php } ?>
 	</table>
 	<div><a href="./writeBoard.php">글쓰기</a></div>
+	<form action="" method="get">
+		<select name="category" id="search_opt" onchange="info()">
+			<option value="title">제목</option>
+			<option value="content">내용</option>
+			<option value="written">작성자</option>
+		</select>
+		<input class="textform" type="text" name="search" id="search_box" autocomplete="off" placeholder="제목을 입력해주세요." required>
+		<input class="submit" type="submit" value="검색">
+			<p>
+				<input type="date" name="date1">
+				~
+				<input type="date" name="date2">
+			</p>
+	</form>
 </body>
 </html>
