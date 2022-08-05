@@ -83,7 +83,7 @@
 		<select name="category" id="search_opt" onchange="info()">
 			<option value="title">제목</option>
 			<option value="content">내용</option>
-			<option value="written">작성자</option>
+			<option value="user_id">작성자</option>
 		</select>
 		<input class="textform" type="text" name="search" id="search_box" autocomplete="off" placeholder="제목을 입력해주세요." required>
 		<input class="submit" type="submit" value="검색">
