@@ -79,7 +79,7 @@
 		<?php } ?>
 	</table>
 	<div><a href="./writeBoard.php">글쓰기</a></div>
-	<form action="" method="get">
+	<form action="./searchBoard.php" method="get">
 		<select name="category" id="search_opt" onchange="info()">
 			<option value="title">제목</option>
 			<option value="content">내용</option>
