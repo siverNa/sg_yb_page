@@ -1,0 +1,53 @@
+<html lang="ko">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<meta name = "viewport" content="width=device-width, initial-scale=1.0">
+		<title>signup page</title>
+		<script>
+			//아이디 중복 체크용 새창 띄우기
+			function checkid()
+			{
+				window.open("../php/check_id.php?userid=" + document.signup.user_id.value,"IDcheck",
+							"left=50, top=50, width=300, height=300, scrollbar=no, resizeable=no");
+			}
+			
+			//입력한 아이디로 사용할 경우 동작하는 함수
+			function decide(){
+				document.getElementById("decide").innerHTML = "<span style='color:blue;'>사용가능한 ID입니다.</span>"
+				document.getElementById("decide_id").value = document.getElementById("uid").value
+				document.getElementById("uid").disabled = true
+				document.getElementById("signup_button").disabled = false
+				document.getElementById("check_button").value = "다른 ID로 변경"
+				document.getElementById("check_button").setAttribute("onclick", "change()")
+			}
+
+			//중복된 아이디이거나, 다른 아이디를 사용할 경우 동작하는 함수
+			function change(){
+				document.getElementById("decide").innerHTML = "<span style='color:red;'>ID 중복 여부를 확인해주세요.</span>"
+				document.getElementById("uid").disabled = false
+				document.getElementById("uid").value = ""
+				document.getElementById("signup_button").disabled = true
+				document.getElementById("check_button").value = "ID 중복 검사"
+				document.getElementById("check_button").setAttribute("onclick", "checkid()")
+			}
+			
+		</script>
+	</head>
+	<body>
+		<a href="./main.php">main page로 돌아가기</a>
+		<h1>회원가입(signup)</h1>
+		<h2>이 페이지는 회원가입 페이지입니다</h2>
+		<form action="../php/signup_process.php?mode=signup" method="post" name="signup">
+			<p>아이디 : <input type="text" name="user_id" id="uid" required></p>
+			<input type="hidden" name="decide_id" id="decide_id">
+			<p>
+				<span id="decide" style="color:red;">ID 중복 여부를 확인해주세요.</span>
+				<input type="button" value="중복확인" onclick="checkid()" id="check_button">
+			</p>
+			<p>비밀번호 : <input type="password" name="user_password" required></p>
+			<p>비밀번호 확인 : <input type="password" name="user_password_confirm" required></p>
+			<p><input type="submit" value="회원가입(signup)" id="signup_button" disabled="true">
+				<button onclick="history.back(-1)">취소</button></p>
+		</form>
+	</body>
+</html>
