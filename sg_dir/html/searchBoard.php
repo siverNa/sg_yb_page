@@ -19,7 +19,7 @@
 	{
 		$sql = "
 			SELECT * FROM board
-			WHERE $category LIKE '%$search%' AND written
+			WHERE $category LIKE '%$search%' AND DATE(written)
 			BETWEEN '$date1' AND '$date2'
 		";
 	} else {
@@ -41,7 +41,7 @@
 	{
 		$sql = "
 			SELECT * FROM board
-			WHERE $category LIKE '%$search%' AND written
+			WHERE $category LIKE '%$search%' AND DATE(written)
 			BETWEEN '$date1' AND '$date2'
 			ORDER BY num DESC
 		";
