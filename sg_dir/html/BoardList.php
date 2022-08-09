@@ -2,8 +2,26 @@
 	require_once('../php/db_con.php');
 	session_start();
 
+	//이 아래의 코드는 페이징을 위한 게시글 갯수 카운팅 및 보여줄 게시글 갯수 설정
+	if (isset($_GET['page']))
+		$page = $_GET['page'];
+	else
+		$page = 1;
+	
+	$sql = "
+		SELECT * FROM board
+	";
+	$count_res = mysqli_query($connect, $sql);
+	$total_page = mysqli_num_rows($count_res);
+	
+	$per = 5;
+	$start = ($page - 1) * $per + 1;
+	$start -= 1;
+
+	//게시글들을 내림차순으로 불러오기 위한 코드
 	$sql = "
 		SELECT * FROM board ORDER BY num DESC
+		limit $start, $per
 	";
 	$result = mysqli_query($connect, $sql);
 ?>
@@ -78,6 +96,21 @@
 			</tbody>
 		<?php } ?>
 	</table>
+	<div class=bottom>
+		<?php
+			$total_page = ceil($total_page / $per);
+			$page_num = 1;
+		
+			while ($page_num <= $total_page)
+			{
+				if ($page == $page_num)
+					echo "<a style=\"color:hotpink;\" href=\"BoardList.php?page=$page_num\">$page_num </a>";
+				else
+					echo "<a href=\"BoardList.php?page=$page_num\">$page_num</a>";
+				$page_num++;
+			}
+		?>
+	</div>
 	<div><a href="./writeBoard.php">글쓰기</a></div>
 	<form action="./searchBoard.php" method="get">
 		<select name="category" id="search_opt" onchange="info()">
