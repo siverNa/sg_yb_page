@@ -96,8 +96,18 @@
 			</tbody>
 		<?php } ?>
 	</table>
+	<!-- 페이징 코드 부분 -->
 	<div class=bottom>
 		<?php
+			if($page > 1){
+				echo "<a href=\"BoardList.php?page=1\">[<<] </a>";
+			}
+
+			if($page > 1){
+				$prev = $page - 1;
+				echo "<a href=\"BoardList.php?page=$prev\">[<]</a>";
+			}
+
 			$total_page = ceil($total_page / $per);
 			$page_num = 1;
 		
@@ -109,8 +119,18 @@
 					echo "<a href=\"BoardList.php?page=$page_num\">$page_num</a>";
 				$page_num++;
 			}
+
+			if($page < $total_page){
+				$next = $page + 1;
+				echo "<a href=\"BoardList.php?page=$next\">[>]</a>";
+			}
+
+			if($page < $total_page){
+				echo "<a href=\"BoardList.php?page=$total_page\">[>>]</a>";
+			}
 		?>
 	</div>
+	<!-- 페이징 코드 끝 -->
 	<div><a href="./writeBoard.php">글쓰기</a></div>
 	<form action="./searchBoard.php" method="get">
 		<select name="category" id="search_opt" onchange="info()">
