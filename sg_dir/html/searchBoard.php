@@ -7,12 +7,10 @@
 	$date1 = $_GET['date1'];
 	$date2 = $_GET['date2'];
 
-	/*
 	if (isset($_GET['page']))
 		$page = $_GET['page'];
 	else
 		$page = 1;
-	*/
 	
 	//검색결과 갯수 확인
 	if ($date1 && $date2)
@@ -30,10 +28,8 @@
 	$col_result = mysqli_query($connect, $sql);
 	$col_count = mysqli_num_rows($col_result);
 
-	/*
-	$per = 20;
+	$per = 5;
 	$start = ($page - 1) * $per;
-	*/
 
 	//기간이 설정되었을 경우, $category 컬럼 안에 $search 가 포함된 결과를 찾는데
 	//$date1 ~ $date2 사이의 결과를 내림차순으로 출력
@@ -43,7 +39,7 @@
 			SELECT * FROM board
 			WHERE $category LIKE '%$search%' AND DATE(written)
 			BETWEEN '$date1' AND '$date2'
-			ORDER BY num DESC
+			ORDER BY num DESC limit $start, $per
 		";
 	}
 	else
@@ -51,7 +47,7 @@
 		$sql = "
 			SELECT * FROM board
 			WHERE $category LIKE '%$search%'
-			ORDER BY num DESC
+			ORDER BY num DESC limit $start, $per
 		";
 	}
 
@@ -142,6 +138,39 @@
 			</tbody>
 		<?php } ?>
 	</table>
+	<div>
+		<?php
+			if($page > 1){
+				echo "<a href=\"searchBoard.php?page=1&categoty=$category&search=$search&date1=$date1&date2=$date2\">[<<] </a>";
+			}
+
+			if($page > 1){
+				$prev = $page - 1;
+				echo "<a href=\"searchBoard.php?page=$prev&categoty=$category&search=$search&date1=$date1&date2=$date2\">[<]</a>";
+			}
+
+			$col_count = ceil($col_count / $per);
+			$page_num = 1;
+		
+			while ($page_num <= $col_count)
+			{
+				if ($page == $page_num)
+					echo "<a style=\"color:hotpink;\" href=\"searchBoard.php?page=$page_num&categoty=$category&search=$search&date1=$date1&date2=$date2\">$page_num </a>";
+				else
+					echo "<a href=\"searchBoard.php?page=$page_num&categoty=$category&search=$search&date1=$date1&date2=$date2\">$page_num</a>";
+				$page_num++;
+			}
+
+			if($page < $col_count){
+				$next = $page + 1;
+				echo "<a href=\"searchBoard.php?page=$next&categoty=$category&search=$search&date1=$date1&date2=$date2\">[>]</a>";
+			}
+
+			if($page < $col_count){
+				echo "<a href=\"searchBoard.php?page=$total_page&categoty=$category&search=$search&date1=$date1&date2=$date2\">[>>]</a>";
+			}
+		?>
+	</div>
 	<div><a href="./writeBoard.php">글쓰기</a></div>
 	<form action="./searchBoard.php" method="get">
 		<select name="category" id="search_opt" onchange="info()">
