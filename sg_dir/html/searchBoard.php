@@ -141,12 +141,12 @@
 	<div>
 		<?php
 			if($page > 1){
-				echo "<a href=\"searchBoard.php?page=1&categoty=$category&search=$search&date1=$date1&date2=$date2\">[<<] </a>";
+				echo "<a href=\"searchBoard.php?page=1&category=$category&search=$search&date1=$date1&date2=$date2\">[<<] </a>";
 			}
 
 			if($page > 1){
 				$prev = $page - 1;
-				echo "<a href=\"searchBoard.php?page=$prev&categoty=$category&search=$search&date1=$date1&date2=$date2\">[<]</a>";
+				echo "<a href=\"searchBoard.php?page=$prev&category=$category&search=$search&date1=$date1&date2=$date2\">[<]</a>";
 			}
 
 			$col_count = ceil($col_count / $per);
@@ -155,19 +155,19 @@
 			while ($page_num <= $col_count)
 			{
 				if ($page == $page_num)
-					echo "<a style=\"color:hotpink;\" href=\"searchBoard.php?page=$page_num&categoty=$category&search=$search&date1=$date1&date2=$date2\">$page_num </a>";
+					echo "<a style=\"color:hotpink;\" href=\"searchBoard.php?page=$page_num&category=$category&search=$search&date1=$date1&date2=$date2\">$page_num </a>";
 				else
-					echo "<a href=\"searchBoard.php?page=$page_num&categoty=$category&search=$search&date1=$date1&date2=$date2\">$page_num</a>";
+					echo "<a href=\"searchBoard.php?page=$page_num&category=$category&search=$search&date1=$date1&date2=$date2\">$page_num</a>";
 				$page_num++;
 			}
 
 			if($page < $col_count){
 				$next = $page + 1;
-				echo "<a href=\"searchBoard.php?page=$next&categoty=$category&search=$search&date1=$date1&date2=$date2\">[>]</a>";
+				echo "<a href=\"searchBoard.php?page=$next&category=$category&search=$search&date1=$date1&date2=$date2\">[>]</a>";
 			}
 
 			if($page < $col_count){
-				echo "<a href=\"searchBoard.php?page=$total_page&categoty=$category&search=$search&date1=$date1&date2=$date2\">[>>]</a>";
+				echo "<a href=\"searchBoard.php?page=$total_page&category=$category&search=$search&date1=$date1&date2=$date2\">[>>]</a>";
 			}
 		?>
 	</div>
