@@ -73,6 +73,21 @@
 		
 		case 'delete' : 
 			$num = $_GET['num'];
+
+			$sql = "
+				SELECT file FROM board WHERE num='$num'
+			";
+			$result = mysqli_query($connect, $sql);
+			$row = mysqli_fetch_array($result);
+			if ($row['file'] != NULL)
+			{
+				if (!unlink("../file/upload/".$row['file']))
+				{
+					echo "파일 삭제하는 데 문제가 생겼습니다. 관리자에게 문의하십시오.";
+					exit;
+				}
+			}
+
 			$sql = "
 				DELETE FROM board WHERE num='$num'
 			";
