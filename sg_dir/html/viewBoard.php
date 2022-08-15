@@ -53,10 +53,14 @@
 		<div>
 			<div><?= $row['user_id'] ?></div>
 			<div><?= $row['written'] ?></div>
+			<p><div class="hit"> 조회수 <?=$row['hit']; ?></div></p>
+
 		</div>
 		<div>
 			<?= $row['content'] ?>
 		</div>
+		<p><div class="liked"> 추천 <?=$row['liked']; ?></div></p>
+		<p class="file"><a href="../file/upload/<?=$row['file']; ?>" download><?=$row['file']; ?></a></p>
 		<div><a href="./BoardList.php">목록으로</a></div>
 		<?php
 			if ($row['user_id'] != $_SESSION['user_id'])
