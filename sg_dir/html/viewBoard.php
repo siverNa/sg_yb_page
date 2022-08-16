@@ -8,6 +8,14 @@
 	";
 	$result = mysqli_query($connect, $sql);
 	$row = mysqli_fetch_array($result);
+
+	if ($_SESSION['user_id'] != $row['user_id'])
+	{
+		$hit_sql = "
+			UPDATE board SET hit=hit+1 WHERE num='$num'
+		";
+		$hit_row = mysqli_query($connect, $hit_sql);
+	}
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -60,6 +68,12 @@
 			<?= $row['content'] ?>
 		</div>
 		<p><div class="liked"> 추천 <?=$row['liked']; ?></div></p>
+			<?php if ($_SESSION['user_id'] != $row['user_id']) { ?>
+				<div class=mine>
+					<button class=like type="button" onclick="window.location.href='../php/like_ok.php?num=<?=$num ?>'">추천하기</button>
+					<button class=like type="button" onclick="window.location.href='../php/unlike_ok.php?num=<?=$num ?>'">취소</button>
+				</div>
+			<?php } ?>
 		<p class="file"><a href="../file/upload/<?=$row['file']; ?>" download><?=$row['file']; ?></a></p>
 		<div><a href="./BoardList.php">목록으로</a></div>
 		<?php
