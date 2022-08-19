@@ -87,6 +87,60 @@
 				<a href="#" onclick="confirm_delete('정말로 삭제하시겠습니까?')">삭제</a>
 			</div>
 		<?php } ?>
+		<!-- 댓글 불러오기 -->
+		<div class="reply_view">
+			<h3>댓글</h3>
+			<?php
+				$r_sql = "
+					SELECT * FROM reply
+					WHERE board_num='$num'
+					ORDER BY idx
+				";
+				$result = mysqli_query($connect, $r_sql);
+				while ($r_row = mysqli_fetch_array($result)) {
+			?>
+				<div class="reply_log">
+					<div><b><?=$r_row['user_id'];?></b></div>
+					<div><?php echo nl2br("$r_row[content]"); ?></div>
+					<div><?php echo $r_row['date']; ?></div>
+					<div>
+						<a href="#">수정</a>
+						<a href="#">삭제</a>
+					</div>
+					<!-- 댓글 수정 폼 -->
+					<div class="reply_edit">
+						<form action="../php/reply_modify_ok.php" method="post">
+							<input type="hidden" name="user_id" value="<?=$r_row['user_id']; ?>">
+							<input type="hidden" name="board_num" value="=<?=$num; ?>">
+							<textarea name="content" cols="30" rows="10"><?php echo $r_row['content']; ?></textarea>
+							<input type="submit" value="수정하기">
+						</form>
+					</div>
+					<!-- 댓글 삭제 폼 -->
+					<!--
+					<div class="reply_delete">
+						<form action="../php/reply_delete_ok.php" method="post">
+							<input type="hidden" name="reply_idx" value="<?=$r_row['idx']; ?>">
+							<input type="hidden" name="board_num" value="=<?=$num; ?>">
+							<textarea name="content" cols="30" rows="10"><?php echo $r_row['content']; ?></textarea>
+							<input type="submit" value="삭제하기">
+						</form>
+					</div> -->
+				</div>
+			<?php } ?>
+			
+			<!-- 댓글 작성 -->
+			<div class="reply_write">
+				<form action="../php/reply_ok.php?board_num=<?=$row['num']; ?>" method="post">
+					<?php if ($_SESSION['user_id']) { ?>
+						<div>
+							<textarea name="content" cols="30" rows="10"></textarea>
+							<button id="reply_button">댓글</button>
+						</div>
+					<?php } ?>
+				</form>
+			</div>
+		</div><!-- 댓글 불러오기 끝 -->
 	</section>
 </body>
 </html>
