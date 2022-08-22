@@ -81,17 +81,27 @@
 				<th width=120>작성일</th>
 				<th width=70>조회수</th>
 				<th width=70>추천</th>
+				<th width=70>댓글</th>
 			</tr>
 		</thead>
-		<?php while ($row = mysqli_fetch_array($result)) { ?>
+		<?php while ($row = mysqli_fetch_array($result)) { 
+			//해당 게시글의 댓글 수 카운트
+			$b_num = $row['num'];
+			$r_count_sql = "
+				SELECT COUNT(*) AS cnt FROM reply WHERE board_num='$b_num'
+			";
+			$r_count_result = mysqli_query($connect, $r_count_sql);
+			$reply_count = mysqli_fetch_array($r_count_result);
+		?>
 			<tbody>
 				<tr>
 					<td><?php echo $row['num']; ?></td>
-                    <td><a href="viewBoard.php?num=<?=$row['num']?>"><?php echo $row['title']; ?></a></td>
-                    <td><?php echo $row['user_id']; ?></td>
-                    <td><?php echo $row['written']; ?></td>
-                    <td><?php echo $row['hit']; ?></td>
-                    <td><?php echo $row['liked']; ?></td>
+					<td><a href="viewBoard.php?num=<?=$row['num']?>"><?php echo $row['title']; ?></a></td>
+					<td><?php echo $row['user_id']; ?></td>
+					<td><?php echo $row['written']; ?></td>
+					<td><?php echo $row['hit']; ?></td>
+					<td><?php echo $row['liked']; ?></td>
+					<td><?php echo $reply_count['cnt']; ?></td>
 				</tr>
 			</tbody>
 		<?php } ?>
