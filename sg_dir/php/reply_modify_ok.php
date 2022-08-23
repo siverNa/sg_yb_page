@@ -1,5 +1,5 @@
 <?php
-	require_once('../php/db_con.php');
+	require_once('./db_con.php');
 	session_start();
 
 	$reply_num = $_POST['reply_num'];
@@ -18,9 +18,20 @@
 	$sql3 = "
 		UPDATE reply SET content='".$_POST['content']."' WHERE idx='$reply_num';
 	";
+	$update_res = mysqli_query($connect, $sql3);
 
-	echo "
-		<script type='text/javascript'>alert('수정되었습니다.'); 
-		location.replace('../html/viewBoard.php?num=$board_num');</script>
-	";
+	if ($update_res)
+	{
+		echo "
+			<script type='text/javascript'>alert('수정되었습니다.'); 
+			location.replace('../html/viewBoard.php?num=$board_num');</script>
+		";
+	}
+	else
+	{
+		echo "
+			<script type='text/javascript'>alert('수정에 실패했습니다. 관리자에게 문의해주세요.'); 
+			location.replace('../html/viewBoard.php?num=$board_num');</script>
+		";
+	}
 ?>
