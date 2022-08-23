@@ -34,6 +34,8 @@
 		}
 	</script>
 	<title>게시글 목록</title>
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
+	<script type="text/javascript" src="../js/common.js"></script>
 </head>
 <body>
 	<header>
@@ -101,11 +103,11 @@
 			?>
 				<div class="reply_log">
 					<div><b><?=$r_row['user_id'];?></b></div>
-					<div><?php echo nl2br("$r_row[content]"); ?></div>
-					<div><?php echo $r_row['date']; ?></div>
-					<div>
-						<a href="#">수정</a>
-						<a href="#">삭제</a>
+					<div class="dap_to"><?php echo nl2br("$r_row[content]"); ?></div>
+					<div class="dap_to rep_me"><?php echo $r_row['date']; ?></div>
+					<div class="rep_me">
+						<a class="reply_edit_bt" href="#">수정</a>
+						<a class="reply_delete_bt" href="#">삭제</a>
 					</div>
 					<!-- 댓글 수정 폼 -->
 					<div class="reply_edit">
@@ -133,9 +135,9 @@
 			<div class="reply_write">
 				<form action="../php/reply_ok.php?board_num=<?=$row['num']; ?>" method="post">
 					<?php if ($_SESSION['user_id']) { ?>
-						<div>
-							<textarea name="content" cols="30" rows="10"></textarea>
-							<button id="reply_button">댓글</button>
+						<div style="margin-top:10px; ">
+							<textarea name="content" id="reply_content"></textarea>
+							<button id="reply_button" class="rp_bt">댓글</button>
 						</div>
 					<?php } ?>
 				</form>
