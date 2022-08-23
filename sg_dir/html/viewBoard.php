@@ -114,20 +114,20 @@
 						<form action="../php/reply_modify_ok.php" method="post">
 							<input type="hidden" name="user_id" value="<?=$r_row['user_id']; ?>">
 							<input type="hidden" name="board_num" value="=<?=$num; ?>">
+							<input type="hidden" name="reply_num" value="<?=$r_row['idx']; ?>">
 							<textarea name="content" cols="30" rows="10"><?php echo $r_row['content']; ?></textarea>
 							<input type="submit" value="수정하기">
 						</form>
 					</div>
 					<!-- 댓글 삭제 폼 -->
-					<!--
 					<div class="reply_delete">
 						<form action="../php/reply_delete_ok.php" method="post">
-							<input type="hidden" name="reply_idx" value="<?=$r_row['idx']; ?>">
+							<input type="hidden" name="reply_num" value="<?=$r_row['idx']; ?>">
 							<input type="hidden" name="board_num" value="=<?=$num; ?>">
-							<textarea name="content" cols="30" rows="10"><?php echo $r_row['content']; ?></textarea>
+						<!--	<textarea name="content" cols="30" rows="10"><?php echo $r_row['content']; ?></textarea> -->
 							<input type="submit" value="삭제하기">
 						</form>
-					</div> -->
+					</div>
 				</div>
 			<?php } ?>
 			
