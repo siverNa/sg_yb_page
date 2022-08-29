@@ -16,12 +16,12 @@
 .rep_me {
 	font-size:12px;
 }
-.reply_delete {
-	display: none;
-}	
-.reply_edit {
-	display: none;
+#reply_edit {
+	display:none;
 }
+#reply_delete {
+	display:none;
+}	
 .reply_write {
 	margin-top: 50px;
 }
