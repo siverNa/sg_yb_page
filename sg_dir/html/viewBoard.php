@@ -32,16 +32,29 @@
 			else if (selValue == false)
 				history.back(1);
 		}
+		function edit_show() {
+			document.getElementById("reply_edit").style.display = "block";
+		}
+		function edit_hide()
+		{
+			document.getElementById("reply_edit").style.display = "none";
+		}
+		function delete_show() {
+			document.getElementById("reply_delete").style.display = "block";
+		}
+		function delete_hide()
+		{
+			document.getElementById("reply_delete").style.display = "none";
+		}
 	</script>
 	<title>게시글 목록</title>
 	<link rel="stylesheet" type="text/css" href="../css/style.css" />
-	<script type="text/javascript" src="../js/common.js"></script>
 </head>
 <body>
 	<header>
 		<ul>
 			<a href="./main.php"><li>메인으로 돌아가기</li></a>
-			<a href="./Board_list.php"><li>게시판으로 이동</li></a>
+			<a href="./BoardList.php"><li>게시판으로 이동</li></a>
 		</ul>
 		<?php
 			if (!isset($_SESSION['user_id']))
@@ -106,26 +119,31 @@
 					<div class="dap_to"><?php echo nl2br("$r_row[content]"); ?></div>
 					<div class="dap_to rep_me"><?php echo $r_row['date']; ?></div>
 					<div class="rep_me">
-						<a class="reply_edit_bt" href="#">수정</a>
-						<a class="reply_delete_bt" href="#">삭제</a>
+						<button type="button" id="reply_edit_bt" onclick="edit_show();">수정</button>
+						<button type="button" id="reply_delete_bt" onclick="delete_show();">삭제</button>
 					</div>
 					<!-- 댓글 수정 폼 -->
-					<div class="reply_edit">
+					<div id="reply_edit" style="display:none">
 						<form action="../php/reply_modify_ok.php" method="post">
 							<input type="hidden" name="user_id" value="<?=$r_row['user_id']; ?>">
-							<input type="hidden" name="board_num" value="=<?=$num; ?>">
+							<input type="hidden" name="board_num" value="<?=$num; ?>">
 							<input type="hidden" name="reply_num" value="<?=$r_row['idx']; ?>">
 							<textarea name="content" cols="30" rows="10"><?php echo $r_row['content']; ?></textarea>
-							<input type="submit" value="수정하기">
+							<p>
+								<input type="submit" value="수정하기">
+								<button type="button" onclick="edit_hide();">취소</button>	
+							</p>
 						</form>
 					</div>
 					<!-- 댓글 삭제 폼 -->
-					<div class="reply_delete">
+					<div id="reply_delete" style="display:none">
 						<form action="../php/reply_delete_ok.php" method="post">
 							<input type="hidden" name="reply_num" value="<?=$r_row['idx']; ?>">
-							<input type="hidden" name="board_num" value="=<?=$num; ?>">
-						<!--	<textarea name="content" cols="30" rows="10"><?php echo $r_row['content']; ?></textarea> -->
-							<input type="submit" value="삭제하기">
+							<input type="hidden" name="board_num" value="<?=$num; ?>">
+							<p>
+								<input type="submit" value="삭제하기">
+								<button type="button" onclick="delete_hide();">취소</button>	
+							</p>
 						</form>
 					</div>
 				</div>
