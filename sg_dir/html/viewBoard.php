@@ -32,19 +32,21 @@
 			else if (selValue == false)
 				history.back(1);
 		}
-		function edit_show() {
-			document.getElementById("reply_edit").style.display = "block";
+		function edit_show_hide(id) {
+			var con = document.getElementById("reply_edit_" + id);
+			if(con.style.display=='none'){
+				con.style.display = 'block';
+			}
+			else
+				con.style.display = 'none';
 		}
-		function edit_hide()
-		{
-			document.getElementById("reply_edit").style.display = "none";
-		}
-		function delete_show() {
-			document.getElementById("reply_delete").style.display = "block";
-		}
-		function delete_hide()
-		{
-			document.getElementById("reply_delete").style.display = "none";
+		function delete_show_hide(id) {
+			var con = document.getElementById("reply_delete_" + id);
+			if(con.style.display=='none'){
+				con.style.display = 'block';
+			}
+			else
+				con.style.display = 'none';
 		}
 	</script>
 	<title>게시글 목록</title>
@@ -119,11 +121,11 @@
 					<div class="dap_to"><?php echo nl2br("$r_row[content]"); ?></div>
 					<div class="dap_to rep_me"><?php echo $r_row['date']; ?></div>
 					<div class="rep_me">
-						<button type="button" id="reply_edit_bt" onclick="edit_show();">수정</button>
-						<button type="button" id="reply_delete_bt" onclick="delete_show();">삭제</button>
+						<button type="button" id="reply_edit_bt" onclick="edit_show_hide('<?=$r_row['idx'];?>');">수정</button>
+						<button type="button" id="reply_delete_bt" onclick="delete_show_hide('<?=$r_row['idx'];?>');">삭제</button>
 					</div>
 					<!-- 댓글 수정 폼 -->
-					<div id="reply_edit" style="display:none">
+					<div id="reply_edit_<?=$r_row['idx']; ?>" style="display:none">
 						<form action="../php/reply_modify_ok.php" method="post">
 							<input type="hidden" name="user_id" value="<?=$r_row['user_id']; ?>">
 							<input type="hidden" name="board_num" value="<?=$num; ?>">
@@ -131,18 +133,18 @@
 							<textarea name="content" cols="30" rows="10"><?php echo $r_row['content']; ?></textarea>
 							<p>
 								<input type="submit" value="수정하기">
-								<button type="button" onclick="edit_hide();">취소</button>	
+								<button type="button" onclick="edit_show_hide('<?=$r_row['idx'];?>');">취소</button>	
 							</p>
 						</form>
 					</div>
 					<!-- 댓글 삭제 폼 -->
-					<div id="reply_delete" style="display:none">
+					<div id="reply_delete_<?=$r_row['idx']; ?>" style="display:none">
 						<form action="../php/reply_delete_ok.php" method="post">
 							<input type="hidden" name="reply_num" value="<?=$r_row['idx']; ?>">
 							<input type="hidden" name="board_num" value="<?=$num; ?>">
 							<p>
 								<input type="submit" value="삭제하기">
-								<button type="button" onclick="delete_hide();">취소</button>	
+								<button type="button" onclick="delete_show_hide('<?=$r_row['idx'];?>');">취소</button>	
 							</p>
 						</form>
 					</div>
