@@ -81,7 +81,13 @@
 			<p><div class="hit"> 조회수 <?=$row['hit']; ?></div></p>
 
 		</div>
-		<div>
+		<div class="viewContent">
+			<?php
+				if (!$row['file'])
+				{}
+				else
+					echo "<img src='../file/upload/$row[file]'></img></br>";
+			?>
 			<?= $row['content'] ?>
 		</div>
 		<p><div class="liked"> 추천 <?=$row['liked']; ?></div></p>
