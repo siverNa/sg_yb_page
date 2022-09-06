@@ -21,6 +21,7 @@
 				*/
 				$encrypt_password = password_hash($user_password, PASSWORD_DEFAULT);
 
+				/*
 				$sql = "
 				INSERT INTO member (user_id, user_password)
 				VALUES ('$user_id', '$encrypt_password');";
@@ -28,8 +29,22 @@
 				$result = mysqli_query($connect, $sql);
 				if ($result === false)
 					echo mysqli_error($connect);
-				
-				header('Location: ../html/signup_ok.html');
+				*/
+				try {
+					$sql = $connect->prepare("
+						INSERT INTO member (user_id, user_password)
+						VALUES (:user_id, :encrypt_password)
+					");
+
+					$sql->bindParam(':user_id', $user_id);
+					$sql->bindParam(':encrypt_password', $encrypt_password);
+
+					$sql->execute();
+					header('Location: ../html/signup_ok.html');
+				} catch (PDOExceptione $th) {
+					echo "회원가입에 문제가 생겼습니다. 다시 시도해주세요.";
+					header('Location: ../html/main.php');
+				}
 			}
 		break;
 		case 'login' :
