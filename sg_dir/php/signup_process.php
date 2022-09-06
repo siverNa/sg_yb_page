@@ -50,12 +50,19 @@
 		case 'login' :
 			$user_id = $_POST['user_id'];
 			$user_password = $_POST['user_password'];
-			
+			/*
 			$sql = "
 				SELECT * FROM member WHERE user_id = '$user_id';
 			";
 			$res = mysqli_fetch_array(mysqli_query($connect, $sql));
-
+			*/
+			$sql = $connect->prepare("
+				SELECT * FROM member WHERE user_id = :user_id
+			");
+			$sql->bindParam(':user_id', $user_id);
+			$sql->execute();
+			$res = $sql->fetch();
+			
 			if (!$user_id)
 			{	
 				errPwMsg("아이디를 입력해주세요.");
@@ -71,7 +78,7 @@
 				errPwMsg("존재하지 않는 아이디입니다.");
 				echo "<script>window.location.replace('../html/login.html');</script>";
 			}
-			else if (password_verify($user_password, $res['user_password']))
+			else if (!password_verify($user_password, $res['user_password']))
 			{
 				errPwMsg("비밀번호가 일치하지 않습니다.");
 				echo "<script>window.location.replace('../html/login.html');</script>";
