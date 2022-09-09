@@ -1,5 +1,13 @@
 <?php
 	session_start();
+	require_once('../php/db_con.php');
+
+	$sql = $connect->prepare("
+		SELECT * FROM member WHERE user_id=:user_id
+	");
+	$sql->bindParam(":user_id", $_SESSION['user_id']);
+	$sql->execute();
+	$row = $sql->fetch();
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -26,7 +34,34 @@
 		?>
 		</header>
 		<section>
-			
+			<div class="mainSection">
+				<div class="updateTitle">회원정보 수정</div>
+				<form action="../php/signup_process.php?mode=update" method="post">
+					<input type="hidden" name="user_id" value="<?= $row['user_id']; ?>">
+					<table class="updateTable">
+						<tr>
+							<td>아이디</td>
+							<td><?= $row['user_id']; ?></td>
+						</tr>
+						<tr>
+							<td>현재 비밀번호</td>
+							<td><input type="password" name="prevPw"></td>
+						</tr>
+						<tr>
+							<td>새 비밀번호</td>
+							<td><input type="password" name="newPw1"></td>
+						</tr>
+						<tr>
+							<td>새 비밀번호 확인</td>
+							<td><input type="password" name="newPw2"></td>
+						</tr>
+					</table>
+					<div class="updateButtons">
+						<input type="submit" value="수정하기">
+						<input type="button" value="취소" onclick="history.back()">
+					</div>
+				</form>
+			</div>
 		</section>
 	</body>
 </html>
