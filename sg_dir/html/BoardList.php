@@ -8,22 +8,29 @@
 	else
 		$page = 1;
 	
-	$sql = "
-		SELECT * FROM board
-	";
-	$count_res = mysqli_query($connect, $sql);
-	$total_page = mysqli_num_rows($count_res);
+	// $sql = "
+	// 	SELECT * FROM board
+	// ";
+	// $count_res = mysqli_query($connect, $sql);
+	// $total_page = mysqli_num_rows($count_res);
+	$sql1 = $connect->prepare("SELECT * FROM board");
+	$sql1->execute();
+	$total_page = $sql1->rowCount();
 	
 	$per = 5;
 	$start = ($page - 1) * $per + 1;
 	$start -= 1;
 
 	//게시글들을 내림차순으로 불러오기 위한 코드
-	$sql = "
-		SELECT * FROM board ORDER BY num DESC
-		limit $start, $per
-	";
-	$result = mysqli_query($connect, $sql);
+	// $sql = "
+	// 	SELECT * FROM board ORDER BY num DESC
+	// 	limit $start, $per
+	// ";
+	// $result = mysqli_query($connect, $sql);
+	$sql2 = $connect->prepare("
+		SELECT * FROM board ORDER BY num DESC limit $start, $per
+	");
+	$sql2->execute();
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -84,14 +91,20 @@
 				<th width=70>댓글</th>
 			</tr>
 		</thead>
-		<?php while ($row = mysqli_fetch_array($result)) { 
+		<?php while ($row = $sql2->fetch()) { 
 			//해당 게시글의 댓글 수 카운트
 			$b_num = $row['num'];
-			$r_count_sql = "
-				SELECT COUNT(*) AS cnt FROM reply WHERE board_num='$b_num'
-			";
-			$r_count_result = mysqli_query($connect, $r_count_sql);
-			$reply_count = mysqli_fetch_array($r_count_result);
+			// $r_count_sql = "
+			// 	SELECT COUNT(*) AS cnt FROM reply WHERE board_num='$b_num'
+			// ";
+			// $r_count_result = mysqli_query($connect, $r_count_sql);
+			// $reply_count = mysqli_fetch_array($r_count_result);
+			$page_sql = $connect->prepare("
+				SELECT COUNT(*) AS cnt FROM reply WHERE board_num=:b_num
+			");
+			$page_sql->bindParam(':b_num', $b_num);
+			$page_sql->execute();
+			$reply_count = $page_sql->fetch();
 		?>
 			<tbody>
 				<tr>

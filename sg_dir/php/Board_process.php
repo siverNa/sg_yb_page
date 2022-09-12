@@ -50,18 +50,30 @@
 					else
 						move_uploaded_file($tmp_file, $dir);
 				}
-				$sql = "
+				// $sql = "
+				// 	INSERT INTO board(user_id, title, content, written, hit, liked, file)
+				// 	VALUES ('$user_id', '$title', '$content', now(), 0, 0, '$file_name');
+				// ";
+				// $result = mysqli_query($connect, $sql);
+				// if ($result)
+				// {
+				// 	echo "<script>alert('게시글이 작성되었습니다');";
+				// 	echo "window.location.replace('../html/BoardList.php');</script>";
+				// }
+				// else
+				// 	echo mysqli_error($connect);
+				$sql = $connect->prepare("
 					INSERT INTO board(user_id, title, content, written, hit, liked, file)
-					VALUES ('$user_id', '$title', '$content', now(), 0, 0, '$file_name');
-				";
-				$result = mysqli_query($connect, $sql);
-				if ($result)
-				{
-					echo "<script>alert('게시글이 작성되었습니다');";
-					echo "window.location.replace('../html/BoardList.php');</script>";
-				}
-				else
-					echo mysqli_error($connect);
+					VALUES (:user_id, :title, :content, now(), 0, 0, :file_name);
+				");
+				$sql->bindParam(':user_id', $user_id);
+				$sql->bindParam(':title', $title);
+				$sql->bindParam(':content', $content);
+				$sql->bindParam(':file_name', $file_name);
+				$sql->execute();
+				
+				echo "<script>alert('게시글이 작성되었습니다');";
+				echo "window.location.replace('../html/BoardList.php');</script>";
 			}
 			break;
 		case 'update' : 
