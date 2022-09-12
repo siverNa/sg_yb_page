@@ -3,18 +3,29 @@
 	session_start();
 
 	$num = $_GET['num'];
-	$sql = "
-		SELECT * FROM board WHERE num='$num'
-	";
-	$result = mysqli_query($connect, $sql);
-	$row = mysqli_fetch_array($result);
+	// $sql = "
+	// 	SELECT * FROM board WHERE num='$num'
+	// ";
+	// $result = mysqli_query($connect, $sql);
+	// $row = mysqli_fetch_array($result);
+	$sql = $connect->prepare("
+		SELECT * FROM board WHERE num=:num
+	");
+	$sql->bindParam(':num', $num);
+	$sql->execute();
+	$row = $sql->fetch();
 
 	if ($_SESSION['user_id'] != $row['user_id'])
 	{
-		$hit_sql = "
-			UPDATE board SET hit=hit+1 WHERE num='$num'
-		";
-		$hit_row = mysqli_query($connect, $hit_sql);
+		// $hit_sql = "
+		// 	UPDATE board SET hit=hit+1 WHERE num='$num'
+		// ";
+		// $hit_row = mysqli_query($connect, $hit_sql);
+		$hit_sql = $connect->prepare("
+			UPDATE board SET hit=hit+1 WHERE num=:num
+		");
+		$hit_sql->bindParam(':num', $num);
+		$hit_sql->execute();
 	}
 ?>
 <!DOCTYPE html>
@@ -114,13 +125,20 @@
 		<div class="reply_view">
 			<h3>댓글</h3>
 			<?php
-				$r_sql = "
+				// $r_sql = "
+				// 	SELECT * FROM reply
+				// 	WHERE board_num='$num'
+				// 	ORDER BY idx
+				// ";
+				// $result = mysqli_query($connect, $r_sql);
+				$r_sql = $connect->prepare("
 					SELECT * FROM reply
-					WHERE board_num='$num'
+					WHERE board_num=:num
 					ORDER BY idx
-				";
-				$result = mysqli_query($connect, $r_sql);
-				while ($r_row = mysqli_fetch_array($result)) {
+				");
+				$r_sql->bindParam(':num', $num);
+				$r_sql->execute();
+				while ($r_row = $r_sql->fetch()) {
 			?>
 				<div class="reply_log">
 					<div><b><?=$r_row['user_id'];?></b></div>
