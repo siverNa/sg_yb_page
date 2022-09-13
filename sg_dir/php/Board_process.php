@@ -81,18 +81,27 @@
 			$update_title = $_POST['title'];
 			$update_content = $_POST['content'];
 
-			$sql = "
-				UPDATE board SET title='$update_title', content='$update_content' WHERE num='$num'
-			";
-			$result = mysqli_query($connect, $sql);
-			if ($result)
-			{
-				echo "<script>alert('게시글이 수정되었습니다');";
-				echo "window.location.replace('../html/BoardList.php');</script>";
-			}
-			else
-				echo mysqli_error($connect);
-
+			// $sql = "
+			// 	UPDATE board SET title='$update_title', content='$update_content' WHERE num='$num'
+			// ";
+			// $result = mysqli_query($connect, $sql);
+			// if ($result)
+			// {
+			// 	echo "<script>alert('게시글이 수정되었습니다');";
+			// 	echo "window.location.replace('../html/BoardList.php');</script>";
+			// }
+			// else
+			// 	echo mysqli_error($connect);
+			$sql = $connect->prepare("
+				UPDATE board SET title=:update_title, content=:update_content WHERE num=:num
+			");
+			$sql->bindParam(':update_title', $update_title);
+			$sql->bindParam(':update_content', $update_content);
+			$sql->bindParam(':num', $num);
+			$sql->execute();
+			
+			echo "<script>alert('게시글이 수정되었습니다');";
+			echo "window.location.replace('../html/BoardList.php');</script>";
 			break;
 		
 		case 'delete' : 

@@ -3,11 +3,17 @@
 	session_start();
 
 	$num = $_GET['num'];
-	$sql = "
-		SELECT * FROM board WHERE num='$num'
-	";
-	$result = mysqli_query($connect, $sql);
-	$row = mysqli_fetch_array($result);
+	// $sql = "
+	// 	SELECT * FROM board WHERE num='$num'
+	// ";
+	// $result = mysqli_query($connect, $sql);
+	// $row = mysqli_fetch_array($result);
+	$sql = $connect->prepare("
+		SELECT * FROM board WHERE num=:num
+	");
+	$sql->bindParam(':num', $num);
+	$sql->execute();
+	$row = $sql->fetch();
 
 	if ($row['user_id'] != $_SESSION['user_id'])
 		errPwMsg("수정 권한이 없습니다.")
@@ -48,6 +54,13 @@
 			<input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
 			<p><input type="text" name="title" value="<?= $row['title'] ?>" required></p>
 			<textarea name="content" cols="100" rows="50" required><?= $row['content'] ?></textarea>
+			<?php 
+				if(!$row['file'])
+				{} 
+				else { ?>
+					<?= $row['file'] ?><br>
+			<?php } ?>
+			<input type="file" name="image" value="<?= $row['file'] ?>">
 			<div>
 				<input type="submit" value="수정하기">&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="button" value="취소" onclick="history.back(1)">
