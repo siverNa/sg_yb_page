@@ -99,7 +99,7 @@
 			$sql->bindParam(':update_content', $update_content);
 			$sql->bindParam(':num', $num);
 			$sql->execute();
-			
+
 			echo "<script>alert('게시글이 수정되었습니다');";
 			echo "window.location.replace('../html/BoardList.php');</script>";
 			break;
@@ -107,11 +107,17 @@
 		case 'delete' : 
 			$num = $_GET['num'];
 
-			$sql = "
-				SELECT file FROM board WHERE num='$num'
-			";
-			$result = mysqli_query($connect, $sql);
-			$row = mysqli_fetch_array($result);
+			// $sql = "
+			// 	SELECT file FROM board WHERE num='$num'
+			// ";
+			// $result = mysqli_query($connect, $sql);
+			// $row = mysqli_fetch_array($result);
+			$sql = $connect->prepare("
+				SELECT file FROM board WHERE num=:num
+			");
+			$sql->bindParam(':num', $num);
+			$sql->execute();
+			$row = $sql->fetch();
 			if ($row['file'] != NULL)
 			{
 				if (!unlink("../file/upload/".$row['file']))
@@ -121,17 +127,25 @@
 				}
 			}
 
-			$sql = "
-				DELETE FROM board WHERE num='$num'
-			";
-			$result = mysqli_query($connect, $sql);
-			if ($result)
-			{
-				echo "<script>alert('게시글이 삭제되었습니다');";
-				echo "window.location.replace('../html/BoardList.php');</script>";
-			}
-			else
-				echo mysqli_error($connect);
+			// $sql = "
+			// 	DELETE FROM board WHERE num='$num'
+			// ";
+			// $result = mysqli_query($connect, $sql);
+			// if ($result)
+			// {
+			// 	echo "<script>alert('게시글이 삭제되었습니다');";
+			// 	echo "window.location.replace('../html/BoardList.php');</script>";
+			// }
+			// else
+			// 	echo mysqli_error($connect);
+			$del_sql = $connect->prepare("
+				DELETE FROM board WHERE num=:num
+			");
+			$del_sql->bindParam(':num', $num);
+			$del_sql->execute();
+
+			echo "<script>alert('게시글이 삭제되었습니다');";
+			echo "window.location.replace('../html/BoardList.php');</script>";
 			break;
 	}
 ?>
