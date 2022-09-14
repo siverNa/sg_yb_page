@@ -144,10 +144,12 @@
 					<div><b><?=$r_row['user_id'];?></b></div>
 					<div class="dap_to"><?php echo nl2br("$r_row[content]"); ?></div>
 					<div class="dap_to rep_me"><?php echo $r_row['date']; ?></div>
+					<?php if ($r_row['user_id'] == $_SESSION['user_id']) { ?>
 					<div class="rep_me">
 						<button type="button" id="reply_edit_bt" onclick="edit_show_hide('<?=$r_row['idx'];?>');">수정</button>
 						<button type="button" id="reply_delete_bt" onclick="delete_show_hide('<?=$r_row['idx'];?>');">삭제</button>
 					</div>
+					<?php } ?>
 					<!-- 댓글 수정 폼 -->
 					<div id="reply_edit_<?=$r_row['idx']; ?>" style="display:none">
 						<form action="../php/reply_modify_ok.php" method="post">
