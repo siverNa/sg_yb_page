@@ -47,7 +47,7 @@
 				info = "제목을 입력해주세요."
 			else if (opt_val == 'content')
 				info = "내용을 입력해주세요."
-			else if (opt_val == 'written')
+			else if (opt_val == 'user_id')
 				info = "작성자를 입력해주세요."
 			
 			document.getElementById("search_box").placeholder = info;
