@@ -17,10 +17,6 @@
 
 	if ($_SESSION['user_id'] != $row['user_id'])
 	{
-		// $hit_sql = "
-		// 	UPDATE board SET hit=hit+1 WHERE num='$num'
-		// ";
-		// $hit_row = mysqli_query($connect, $hit_sql);
 		$hit_sql = $connect->prepare("
 			UPDATE board SET hit=hit+1 WHERE num=:num
 		");
@@ -125,12 +121,6 @@
 		<div class="reply_view">
 			<h3>댓글</h3>
 			<?php
-				// $r_sql = "
-				// 	SELECT * FROM reply
-				// 	WHERE board_num='$num'
-				// 	ORDER BY idx
-				// ";
-				// $result = mysqli_query($connect, $r_sql);
 				$r_sql = $connect->prepare("
 					SELECT * FROM reply
 					WHERE board_num=:num

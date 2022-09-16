@@ -50,18 +50,6 @@
 					else
 						move_uploaded_file($tmp_file, $dir);
 				}
-				// $sql = "
-				// 	INSERT INTO board(user_id, title, content, written, hit, liked, file)
-				// 	VALUES ('$user_id', '$title', '$content', now(), 0, 0, '$file_name');
-				// ";
-				// $result = mysqli_query($connect, $sql);
-				// if ($result)
-				// {
-				// 	echo "<script>alert('게시글이 작성되었습니다');";
-				// 	echo "window.location.replace('../html/BoardList.php');</script>";
-				// }
-				// else
-				// 	echo mysqli_error($connect);
 				$sql = $connect->prepare("
 					INSERT INTO board(user_id, title, content, written, hit, liked, file)
 					VALUES (:user_id, :title, :content, now(), 0, 0, :file_name);
@@ -81,17 +69,6 @@
 			$update_title = $_POST['title'];
 			$update_content = $_POST['content'];
 
-			// $sql = "
-			// 	UPDATE board SET title='$update_title', content='$update_content' WHERE num='$num'
-			// ";
-			// $result = mysqli_query($connect, $sql);
-			// if ($result)
-			// {
-			// 	echo "<script>alert('게시글이 수정되었습니다');";
-			// 	echo "window.location.replace('../html/BoardList.php');</script>";
-			// }
-			// else
-			// 	echo mysqli_error($connect);
 			$sql = $connect->prepare("
 				UPDATE board SET title=:update_title, content=:update_content WHERE num=:num
 			");
@@ -107,11 +84,6 @@
 		case 'delete' : 
 			$num = $_GET['num'];
 
-			// $sql = "
-			// 	SELECT file FROM board WHERE num='$num'
-			// ";
-			// $result = mysqli_query($connect, $sql);
-			// $row = mysqli_fetch_array($result);
 			$sql = $connect->prepare("
 				SELECT file FROM board WHERE num=:num
 			");
@@ -127,17 +99,6 @@
 				}
 			}
 
-			// $sql = "
-			// 	DELETE FROM board WHERE num='$num'
-			// ";
-			// $result = mysqli_query($connect, $sql);
-			// if ($result)
-			// {
-			// 	echo "<script>alert('게시글이 삭제되었습니다');";
-			// 	echo "window.location.replace('../html/BoardList.php');</script>";
-			// }
-			// else
-			// 	echo mysqli_error($connect);
 			$del_sql = $connect->prepare("
 				DELETE FROM board WHERE num=:num
 			");

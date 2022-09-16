@@ -3,11 +3,6 @@
 	session_start();
 
 	$num = $_GET['num'];
-	// $sql = "
-	// 	SELECT * FROM board WHERE num='$num'
-	// ";
-	// $result = mysqli_query($connect, $sql);
-	// $row = mysqli_fetch_array($result);
 	$sql = $connect->prepare("
 		SELECT * FROM board WHERE num=:num
 	");

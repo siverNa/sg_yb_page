@@ -6,11 +6,6 @@
 	$user_id = $_SESSION['user_id'];
 	if ($board_num && $user_id && $_POST['content'])
 	{
-		// $sql = "
-		// 	INSERT INTO reply(board_num, user_id, content, date)
-		// 	VALUES('$board_num', '$user_id', '".$_POST['content']."', now())
-		// ";
-		// $result = mysqli_query($connect, $sql);
 		$sql = $connect->prepare("
 			INSERT INTO reply(board_num, user_id, content, date)
 			VALUES(:board_num, :user_id, :content, now())

@@ -21,15 +21,6 @@
 				*/
 				$encrypt_password = password_hash($user_password, PASSWORD_DEFAULT);
 
-				/*
-				$sql = "
-				INSERT INTO member (user_id, user_password)
-				VALUES ('$user_id', '$encrypt_password');";
-			
-				$result = mysqli_query($connect, $sql);
-				if ($result === false)
-					echo mysqli_error($connect);
-				*/
 				try {
 					$sql = $connect->prepare("
 						INSERT INTO member (user_id, user_password)
@@ -50,12 +41,7 @@
 		case 'login' :
 			$user_id = $_POST['user_id'];
 			$user_password = $_POST['user_password'];
-			/*
-			$sql = "
-				SELECT * FROM member WHERE user_id = '$user_id';
-			";
-			$res = mysqli_fetch_array(mysqli_query($connect, $sql));
-			*/
+
 			$sql = $connect->prepare("
 				SELECT * FROM member WHERE user_id = :user_id
 			");

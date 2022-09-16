@@ -27,8 +27,6 @@
 			WHERE $category LIKE '%$search%'
 		";
 	}
-	// $col_result = mysqli_query($connect, $sql);
-	// $col_count = mysqli_num_rows($col_result);
 	$col_count = $connect->query($sql)->fetchColumn();
 
 	$per = 5;
@@ -39,12 +37,6 @@
 	//$date1 ~ $date2 사이의 결과를 내림차순으로 출력
 	if ($date1 && $date2)
 	{
-		// $sql = "
-		// 	SELECT * FROM board
-		// 	WHERE $category LIKE '%$search%' AND DATE(written)
-		// 	BETWEEN '$date1' AND '$date2'
-		// 	ORDER BY num DESC limit $start, $per
-		// ";
 		$sql2 = $connect->prepare("
 			SELECT * FROM board
 			WHERE $category LIKE :keyword AND DATE(written)
@@ -55,11 +47,6 @@
 	}
 	else
 	{
-		// $sql = "
-		// 	SELECT * FROM board
-		// 	WHERE $category LIKE '%$search%'
-		// 	ORDER BY num DESC limit $start, $per
-		// ";
 		$sql2 = $connect->prepare("
 			SELECT * FROM board
 			WHERE $category LIKE :keyword
@@ -68,7 +55,6 @@
 		$sql2->bindParam(':keyword', $keyword);
 	}
 
-	// $result = mysqli_query($connect, $sql);
 	$sql2->execute();
 ?>
 <!DOCTYPE html>
