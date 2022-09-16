@@ -24,16 +24,17 @@
 		{
 			echo '<div class="helloUser">'.$_SESSION['user_id'].'님 환영합니다.</div>';
 			echo '<div class="outAndUpdate"><a href="../php/signup_process.php?mode=logout">로그아웃 </a> | 
-			<a href="member/update.php">정보수정</a>
+			<a href="./memberModify.php">정보수정</a>
 			</div>';
 		}
 	?>
 	</header>
 	<h2>글 작성</h2>
-	<form action="../php/board_process.php?mode=write" method="post">
+	<form action="../php/board_process.php?mode=write" method="post" enctype="multipart/form-data">
 		<!--<input type="hidden" name="type" value="board">-->
 		<input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
 		<p><input type="text" name="title" placeholder="제목" required></p>
+		<p><input type="file" name="file" id="input_file"></p>
 		<textarea name="content" cols="100" rows="50" placeholder="본문" required></textarea>
 		<div>
 			<input type="submit" value="글쓰기">&nbsp;&nbsp;&nbsp;&nbsp;

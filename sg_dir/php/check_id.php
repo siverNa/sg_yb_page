@@ -11,11 +11,12 @@
 	}
 	else
 	{
-		$sql = "
-			SELECT * FROM member WHERE user_id='$userid';
-		";
-		$result = mysqli_query($connect, $sql);
-		$count = mysqli_num_rows($result);
+		$sql = $connect->prepare("
+			SELECT * FROM member WHERE user_id=:userid;
+		");
+		$sql->bindParam(':userid', $userid);
+		$sql->execute();
+		$count = $sql->rowCount();
 		if ($count < 1)
 		{
 			//echo "

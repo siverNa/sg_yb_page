@@ -4,58 +4,58 @@
 
 	$category = $_GET['category'];
 	$search = $_GET['search'];
+	$keyword = "%$search%";//pdo에서 like를 사용하기위한 방법
 	$date1 = $_GET['date1'];
 	$date2 = $_GET['date2'];
 
-	/*
 	if (isset($_GET['page']))
 		$page = $_GET['page'];
 	else
 		$page = 1;
-	*/
 	
 	//검색결과 갯수 확인
 	if ($date1 && $date2)
 	{
 		$sql = "
-			SELECT * FROM board
-			WHERE $category LIKE '%$search%' AND written
+			SELECT COUNT(*) FROM board
+			WHERE $category LIKE '%$search%' AND DATE(written)
 			BETWEEN '$date1' AND '$date2'
 		";
 	} else {
 		$sql = "
-			SELECT * FROM board 
-			WHERE $category LIKE '%$search%'";
+			SELECT COUNT(*) FROM board 
+			WHERE $category LIKE '%$search%'
+		";
 	}
-	$col_result = mysqli_query($connect, $sql);
-	$col_count = mysqli_num_rows($col_result);
+	$col_count = $connect->query($sql)->fetchColumn();
 
-	/*
-	$per = 20;
-	$start = ($page - 1) * $per;
-	*/
+	$per = 5;
+	$start = ($page - 1) * $per + 1;
+	$start -= 1;
 
 	//기간이 설정되었을 경우, $category 컬럼 안에 $search 가 포함된 결과를 찾는데
 	//$date1 ~ $date2 사이의 결과를 내림차순으로 출력
 	if ($date1 && $date2)
 	{
-		$sql = "
+		$sql2 = $connect->prepare("
 			SELECT * FROM board
-			WHERE $category LIKE '%$search%' AND written
+			WHERE $category LIKE :keyword AND DATE(written)
 			BETWEEN '$date1' AND '$date2'
-			ORDER BY num DESC
-		";
+			ORDER BY num DESC limit $start, $per
+		");
+		$sql2->bindParam(':keyword', $keyword);
 	}
 	else
 	{
-		$sql = "
+		$sql2 = $connect->prepare("
 			SELECT * FROM board
-			WHERE $category LIKE '%$search%'
-			ORDER BY num DESC
-		";
+			WHERE $category LIKE :keyword
+			ORDER BY num DESC limit $start, $per
+		");
+		$sql2->bindParam(':keyword', $keyword);
 	}
 
-	$result = mysqli_query($connect, $sql);
+	$sql2->execute();
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -72,7 +72,7 @@
 				info = "제목을 입력해주세요."
 			else if (opt_val == 'content')
 				info = "내용을 입력해주세요."
-			else if (opt_val == 'written')
+			else if (opt_val == 'user_id')
 				info = "작성자를 입력해주세요."
 			
 			document.getElementById("search_box").placeholder = info;
@@ -99,7 +99,7 @@
 			{
 				echo '<div class="helloUser">'.$_SESSION['user_id'].'님 환영합니다.</div>';
 				echo '<div class="outAndUpdate"><a href="../php/signup_process.php?mode=logout">로그아웃 </a> | 
-				<a href="member/update.php">정보수정</a>
+				<a href="./memberModify.php">정보수정</a>
 				</div>';
 			}
 		?>
@@ -124,7 +124,7 @@
 				<th width=70>추천</th>
 			</tr>
 		</thead>
-		<?php while ($row = mysqli_fetch_array($result)) { ?>
+		<?php while ($row = $sql2->fetch()) { ?>
 			<tbody>
 				<tr>
 					<td><?php echo $row['num']; ?></td>
@@ -142,12 +142,45 @@
 			</tbody>
 		<?php } ?>
 	</table>
+	<div>
+		<?php
+			if($page > 1){
+				echo "<a href=\"searchBoard.php?page=1&category=$category&search=$search&date1=$date1&date2=$date2\">[<<] </a>";
+			}
+
+			if($page > 1){
+				$prev = $page - 1;
+				echo "<a href=\"searchBoard.php?page=$prev&category=$category&search=$search&date1=$date1&date2=$date2\">[<]</a>";
+			}
+
+			$total_page = ceil($col_count / $per);
+			$page_num = 1;
+		
+			while ($page_num <= $total_page)
+			{
+				if ($page == $page_num)
+					echo "<a style=\"color:hotpink;\" href=\"searchBoard.php?page=$page_num&category=$category&search=$search&date1=$date1&date2=$date2\">$page_num </a>";
+				else
+					echo "<a href=\"searchBoard.php?page=$page_num&category=$category&search=$search&date1=$date1&date2=$date2\">$page_num</a>";
+				$page_num++;
+			}
+
+			if($page < $total_page){
+				$next = $page + 1;
+				echo "<a href=\"searchBoard.php?page=$next&category=$category&search=$search&date1=$date1&date2=$date2\">[>]</a>";
+			}
+
+			if($page < $total_page){
+				echo "<a href=\"searchBoard.php?page=$total_page&category=$category&search=$search&date1=$date1&date2=$date2\">[>>]</a>";
+			}
+		?>
+	</div>
 	<div><a href="./writeBoard.php">글쓰기</a></div>
 	<form action="./searchBoard.php" method="get">
 		<select name="category" id="search_opt" onchange="info()">
 			<option value="title">제목</option>
 			<option value="content">내용</option>
-			<option value="written">작성자</option>
+			<option value="user_id">작성자</option>
 		</select>
 		<input class="textform" type="text" name="search" id="search_box" autocomplete="off" placeholder="제목을 입력해주세요." required>
 		<input class="submit" type="submit" value="검색">
