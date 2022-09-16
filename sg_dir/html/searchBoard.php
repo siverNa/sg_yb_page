@@ -47,10 +47,11 @@
 		// ";
 		$sql2 = $connect->prepare("
 			SELECT * FROM board
-			WHERE $category LIKE '%$search%' AND DATE(written)
+			WHERE $category LIKE :keyword AND DATE(written)
 			BETWEEN '$date1' AND '$date2'
 			ORDER BY num DESC limit $start, $per
 		");
+		$sql2->bindParam(':keyword', $keyword);
 	}
 	else
 	{
@@ -61,9 +62,10 @@
 		// ";
 		$sql2 = $connect->prepare("
 			SELECT * FROM board
-			WHERE $category LIKE '%$search%'
+			WHERE $category LIKE :keyword
 			ORDER BY num DESC limit $start, $per
 		");
+		$sql2->bindParam(':keyword', $keyword);
 	}
 
 	// $result = mysqli_query($connect, $sql);
