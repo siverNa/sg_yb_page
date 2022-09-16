@@ -95,7 +95,7 @@
 				else
 					echo "<img src='../file/upload/$row[file]'></img></br>";
 			?>
-			<?= $row['content'] ?>
+			<?= nl2br($row['content']) ?>
 		</div>
 		<p><div class="liked"> 추천 <?=$row['liked']; ?></div></p>
 			<?php if ($_SESSION['user_id'] != $row['user_id']) { ?>
