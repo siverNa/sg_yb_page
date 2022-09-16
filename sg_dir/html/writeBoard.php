@@ -24,7 +24,7 @@
 		{
 			echo '<div class="helloUser">'.$_SESSION['user_id'].'님 환영합니다.</div>';
 			echo '<div class="outAndUpdate"><a href="../php/signup_process.php?mode=logout">로그아웃 </a> | 
-			<a href="member/update.php">정보수정</a>
+			<a href="./memberModify.php">정보수정</a>
 			</div>';
 		}
 	?>
