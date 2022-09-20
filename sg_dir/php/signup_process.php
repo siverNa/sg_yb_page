@@ -78,9 +78,18 @@
 			else
 			{
 				$_SESSION['user_id'] = $res['user_id'];
+				$_SESSION['role'] = $res['role'];
 
-				echo "<script>alert('로그인에 성공했습니다!');<script>";
-				header('Location: ../html/main.php');
+				if ($_SESSION['role'] == 'USER')
+				{
+					echo "<script>alert('로그인에 성공했습니다!');<script>";
+					header('Location: ../html/main.php');
+				}
+				else if ($_SESSION['role'] == 'ADMIN')
+				{
+					echo "<script>alert('어서오십시오 관리자님.');<script>";
+					header('Location: ../html/adminMain.php');
+				}
 			}
 			
 		break;
