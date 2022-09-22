@@ -107,16 +107,18 @@
 		<p class="file"><a href="../file/upload/<?=$row['file']; ?>" download><?=$row['file']; ?></a></p>
 		<div><a href="./BoardList.php">목록으로</a></div>
 		<?php
-			if ($row['user_id'] != $_SESSION['user_id'])
-			{}
-			else
+			if ($row['user_id'] == $_SESSION['user_id'] || $_SESSION['role'] == "ADMIN")
 			{
 		?>
 			<div>
 				<a href="./updateBoard.php?num=<?= $row['num'] ?>">수정</a>
 				<a href="#" onclick="confirm_delete('정말로 삭제하시겠습니까?')">삭제</a>
 			</div>
-		<?php } ?>
+		<?php	
+			}
+			else
+			{} 
+		?>
 		<!-- 댓글 불러오기 -->
 		<div class="reply_view">
 			<h3>댓글</h3>
@@ -134,7 +136,7 @@
 					<div><b><?=$r_row['user_id'];?></b></div>
 					<div class="dap_to"><?php echo nl2br("$r_row[content]"); ?></div>
 					<div class="dap_to rep_me"><?php echo $r_row['date']; ?></div>
-					<?php if ($r_row['user_id'] == $_SESSION['user_id']) { ?>
+					<?php if ($r_row['user_id'] == $_SESSION['user_id'] || $_SESSION['role'] == "ADMIN") { ?>
 					<div class="rep_me">
 						<button type="button" id="reply_edit_bt" onclick="edit_show_hide('<?=$r_row['idx'];?>');">수정</button>
 						<button type="button" id="reply_delete_bt" onclick="delete_show_hide('<?=$r_row['idx'];?>');">삭제</button>
