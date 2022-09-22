@@ -42,6 +42,13 @@
 			
 			document.getElementById("search_box").placeholder = info;
 		}
+		function del_post(input_num)
+		{
+			if (confirm('삭제하시겠습니까?'))
+				location.href = `../php/board_process.php?mode=delete&num=${input_num}`;
+			else
+				history.back(1);
+		}
 	</script>
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -79,6 +86,9 @@
 				<th width=70>조회수</th>
 				<th width=70>추천</th>
 				<th width=70>댓글</th>
+				<?php if ($_SESSION['role'] == "ADMIN") { ?>
+					<th width=70>관리</th>
+				<?php } ?>
 			</tr>
 		</thead>
 		<?php while ($row = $sql2->fetch()) { 
@@ -100,6 +110,9 @@
 					<td><?php echo $row['hit']; ?></td>
 					<td><?php echo $row['liked']; ?></td>
 					<td><?php echo $reply_count['cnt']; ?></td>
+					<?php if ($_SESSION['role'] == "ADMIN") { ?>
+						<td><button type="button" onclick="del_post(<?= $row['num'] ?>)">삭제</button></td>
+					<?php } ?>
 				</tr>
 			</tbody>
 		<?php } ?>
