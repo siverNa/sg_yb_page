@@ -29,7 +29,7 @@
 			{
 				echo '<div class="helloUser">'.'관리자 '.$_SESSION['user_id'].'님 환영합니다.</div>';
 				echo '<div class="outAndUpdate"><a href="../php/signup_process.php?mode=logout">로그아웃 </a> | 
-				<a href="./memberModify.php">정보수정</a>
+				<a href="./memberModify.php">정보수정</a> | <a href="./adminControl.php">사용자 관리</a>
 				</div>';
 			}
 		?>
