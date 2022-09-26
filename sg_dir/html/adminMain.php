@@ -19,20 +19,22 @@
 		<title>main page</title>
 	</head>
 	<body>
-		<?php
-			if (!isset($_SESSION['user_id']))
-			{
-				echo '<p><a href="./signup.html">회원가입(signup)</a>';
-				echo '<a href="./login.html">로그인(signin)</a></p>';
-			}
-			else
-			{
-				echo '<div class="helloUser">'.'관리자 '.$_SESSION['user_id'].'님 환영합니다.</div>';
-				echo '<div class="outAndUpdate"><a href="../php/signup_process.php?mode=logout">로그아웃 </a> | 
-				<a href="./memberModify.php">정보수정</a> | <a href="./adminControl.php">사용자 관리</a>
-				</div>';
-			}
-		?>
+		<header>
+			<?php
+				if (!isset($_SESSION['user_id']))
+				{
+					echo '<p><a href="./signup.html">회원가입(signup)</a>';
+					echo '<a href="./login.html">로그인(signin)</a></p>';
+				}
+				else
+				{
+					echo '<div class="helloUser">'.'관리자 '.$_SESSION['user_id'].'님 환영합니다.</div>';
+					echo '<div class="outAndUpdate"><a href="../php/signup_process.php?mode=logout">로그아웃 </a> | 
+					<a href="./memberModify.php">정보수정</a> | <a href="./adminControl.php">사용자 관리</a>
+					</div>';
+				}
+			?>
+		</header>
 		<p>이 페이지는 관리자의 main page 입니다</p>
 		<p><a href="./BoardList.php">게시판으로 이동</a></p>
 	</body>
