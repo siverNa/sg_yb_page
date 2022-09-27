@@ -109,5 +109,9 @@
 		?>
 	</div>
 	<!-- 페이징 코드 끝 -->
+	<form action="./adminSearch.php" method="get">
+		<input class="textform" type="text" name="search_user" id="search_box" autocomplete="off" placeholder="유저명을 입력해주세요." required>
+		<input class="submit" type="submit" value="검색">
+	</form>
 </body>
 </html>
