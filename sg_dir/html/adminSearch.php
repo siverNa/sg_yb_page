@@ -42,6 +42,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<script>
+		function deactivate_user(user_id)
+		{
+			var reason = prompt('사유를 입력해주세요(최대 50자)');
+			if (reason)
+				location.href = `../php/user_control.php?mode=deactivate&user_id=${user_id}&reason=${reason}`;
+			else
+			{
+				alert('취소하였습니다.');
+				history.back(1);
+			}
+		}
+		function activate_user(user_id)
+		{
+			if (confirm('활성화하시겠습니까?'))
+				location.href = `../php/user_control.php?mode=active&user_id=${user_id}`;
+			else
+			{
+				alert('취소하였습니다.');
+				history.back(1);
+			}
+		}
+	</script>
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name = "viewport" content="width=device-width, initial-scale=1.0">
@@ -69,6 +92,7 @@
 		<thead>
 			<tr>
 				<th width=100>User Id</th>
+				<th width=70>상태</th>
 				<th width=70>관리</th>
 			</tr>
 		</thead>
@@ -78,7 +102,21 @@
 			?>
 				<tr>
 					<td><?= $row['user_id']; ?></td>
-					<!-- <td><button type="button" onclick="del_post(<?= $row['id'] ?>)">삭제</button></td> -->
+					<td>
+						<?php
+							if ($row['status'] == "active")
+								echo "<div style='color:green'>".$row['status']."</div>";
+							else if ($row['status'] == "deactivate")
+								echo "<div style='color:red'>".$row['status']."</div>";
+						?>
+					</td>
+					<td>
+						<?php if ($row['status'] == "active" && $row['role'] == "USER") {?>
+							<button type="button" onclick="deactivate_user('<?= $row['user_id'] ?>')">비활성화</button>
+						<?php } else if ($row['status'] == "deactivate") { ?>
+							<button type="button" onclick="activate_user('<?= $row['user_id'] ?>')">활성화</button>
+						<?php } ?>
+					</td>
 				</tr>
 			<?php } ?>
 			<?php if (!$col_count) { ?>
