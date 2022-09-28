@@ -75,12 +75,27 @@
 				errPwMsg("로그인 중 에러가 발생했습니다. 관리자에게 문의하십시오.");
 				echo "<script>window.location.replace('../html/login.html');</script>";
 			}
+			else if ($res['status'] == "deactivate")
+			{
+				echo "<p>다음과 같은 이유로 비활성화 되었습니다.</p>";
+				echo "<p>사유 : ".$res['reason']."</p>";
+				echo "<p><a href='../html/login.html'>로그인 페이지로 이동</a></p>";
+			}
 			else
 			{
 				$_SESSION['user_id'] = $res['user_id'];
+				$_SESSION['role'] = $res['role'];
 
-				echo "<script>alert('로그인에 성공했습니다!');<script>";
-				header('Location: ../html/main.php');
+				if ($_SESSION['role'] == 'USER')
+				{
+					echo "<script>alert('로그인에 성공했습니다!');<script>";
+					header('Location: ../html/main.php');
+				}
+				else if ($_SESSION['role'] == 'ADMIN')
+				{
+					echo "<script>alert('어서오십시오 관리자님.');<script>";
+					header('Location: ../html/adminMain.php');
+				}
 			}
 			
 		break;
@@ -125,5 +140,5 @@
 		break;
 	}
 
-	mysqli_close($connect);
+	//mysqli_close($connect);
 ?>
