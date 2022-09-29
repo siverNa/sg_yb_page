@@ -1,5 +1,15 @@
 <?php
+	require_once('../php/db_con.php');
 	session_start();
+
+	$per = 10;
+	$start = 0;
+
+	//게시글들을 내림차순으로 불러오기 위한 코드
+	$sql2 = $connect->prepare("
+		SELECT * FROM board ORDER BY num DESC limit $start, $per
+	");
+	$sql2->execute();
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -28,7 +38,27 @@
 					<button type='button' class='btn btn-secondary' onclick="location.href='./memberModify.php'">정보 수정</button>
 			<?php } ?>
 		</nav>
-		<p>이 페이지는 main page 입니다</p>
-		<p><a href="./BoardList.php">게시판으로 이동</a></p>
+		<div class="container">
+			<div class="main-title">
+				<h3>SG YB 게시판 입니다.</h3>
+				<p><a href="./BoardList.php">게시판으로 이동</a></p>
+			</div>
+			<div class="main-board">
+				<ul>
+					<?php while ($row = $sql2->fetch()) { 
+						//해당 게시글의 댓글 수 카운트
+						$b_num = $row['num'];
+						$page_sql = $connect->prepare("
+							SELECT COUNT(*) AS cnt FROM reply WHERE board_num=:b_num
+						");
+						$page_sql->bindParam(':b_num', $b_num);
+						$page_sql->execute();
+						$reply_count = $page_sql->fetch();
+					?>
+						<li class="list-border"><a href="viewBoard.php?num=<?=$row['num']?>"><?php echo $row['title']; ?></a>댓글<?php echo $reply_count['cnt']; ?></li>
+					<?php } ?>
+				</ul>
+			</div>
+		</div>
 	</body>
 </html>
