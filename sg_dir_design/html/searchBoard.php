@@ -81,28 +81,37 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<title>검색 결과</title>
 </head>
 <body>
 	<header>
-		<ul>
-			<a href="./main.php"><li>메인으로 돌아가기</li></a>
-			<a href="./Boardlist.php"><li>게시판으로 이동</li></a>
-		</ul>
-		<?php
-			if (!isset($_SESSION['user_id']))
-			{
-				echo '<p><a href="./signup.html">회원가입(signup)</a>';
-				echo '<a href="./login.html">로그인(signin)</a></p>';
-			}
-			else
-			{
-				echo '<div class="helloUser">'.$_SESSION['user_id'].'님 환영합니다.</div>';
-				echo '<div class="outAndUpdate"><a href="../php/signup_process.php?mode=logout">로그아웃 </a> | 
-				<a href="./memberModify.php">정보수정</a>
-				</div>';
-			}
-		?>
+		<nav class="nav-container">
+		<div style="width: 100px;"></div>
+		<img src="../img/kakao.png" alt="logo" style="width: 30px;">
+		<div class="nav-item"><a href="./main.php" style="text-decoration: none; color: white">SG YB page</a></div>
+			<?php if (!isset($_SESSION['user_id'])) { ?>
+				<div style="flex-grow: 1;"></div>
+				<button type='button' class='btn btn-secondary' onclick="location.href='./signup.html'">회원가입(signup)</button>
+				<div style="padding: 20px;"></div>
+				<button type='button' class='btn btn-secondary' onclick="location.href='./login.html'">로그인</button>
+			<?php } else if ($_SESSION['role'] == "USER") { ?>
+				<div class="helloUser"><?php echo $_SESSION['user_id']; ?>님 환영합니다.</div>
+				<div style="flex-grow: 1;"></div>
+				<button type='button' class='btn btn-secondary' onclick="location.href='../php/signup_process.php?mode=logout'">로그아웃</button>
+				<div style="padding: 20px;"></div>
+				<button type='button' class='btn btn-secondary' onclick="location.href='./memberModify.php'">정보 수정</button>
+			<?php } else if ($_SESSION['role'] == "ADMIN") { ?>
+				<div class="helloUser"><?php echo "관리자 ".$_SESSION['user_id']; ?>님 환영합니다.</div>
+				<div style="flex-grow: 1;"></div>
+				<button type='button' class='btn btn-secondary' onclick="location.href='../php/signup_process.php?mode=logout'">로그아웃</button>
+				<div style="padding: 20px;"></div>
+				<button type='button' class='btn btn-secondary' onclick="location.href='./memberModify.php'">정보 수정</button>
+				<div style="padding: 20px;"></div>
+				<button type='button' class='btn btn-secondary' onclick="location.href='./adminControl.php'">사용자 관리</button>
+			<?php } ?>
+		</nav>
 	</header>
 	<div class="head">검색결과 | <?= $category ?> | <?= $search ?></div>
 	<?php
@@ -124,18 +133,20 @@
 				<th width=70>추천</th>
 			</tr>
 		</thead>
-		<?php while ($row = $sql2->fetch()) { ?>
 			<tbody>
+				<?php while ($row = $sql2->fetch()) { 
+					$out = strlen($row['title']) > 20 ? mb_substr($row['title'], 0, 20, "UTF-8")."..." : $row['title'];	
+				?>
 				<tr>
 					<td><?php echo $row['num']; ?></td>
-					<td><a href="viewBoard.php?num=<?=$row['num']?>"><?php echo $row['title']; ?></a></td>
+					<td><a href="viewBoard.php?num=<?=$row['num']?>"><?php echo $out; ?></a></td>
 					<td><?php echo $row['user_id']; ?></td>
 					<td><?php echo $row['written']; ?></td>
 					<td><?php echo $row['hit']; ?></td>
 					<td><?php echo $row['liked']; ?></td>
 				</tr>
+				<?php } ?>
 			</tbody>
-		<?php } ?>
 		<?php if (!$col_count) { ?>
 			<tbody>
 				<tr><p>검색 결과 없음</p></tr>

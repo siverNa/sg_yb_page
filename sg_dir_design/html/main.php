@@ -21,23 +21,33 @@
 		<title>main page</title>
 	</head>
 	<body>
-		<nav class="nav-container">
-		<div style="width: 100px;"></div>
-		<img src="../img/kakao.png" alt="logo" style="width: 30px;">
-		<div class="nav-item">SG YB page</div>
-			<?php if (!isset($_SESSION['user_id'])) { ?>
+		<header>
+			<nav class="nav-container">
+			<div style="width: 100px;"></div>
+			<img src="../img/kakao.png" alt="logo" style="width: 30px;">
+			<div class="nav-item"><a href="./main.php" style="text-decoration: none; color: white">SG YB page</a></div>
+				<?php if (!isset($_SESSION['user_id'])) { ?>
 					<div style="flex-grow: 1;"></div>
 					<button type='button' class='btn btn-secondary' onclick="location.href='./signup.html'">회원가입(signup)</button>
 					<div style="padding: 20px;"></div>
 					<button type='button' class='btn btn-secondary' onclick="location.href='./login.html'">로그인</button>
-			<?php } else { ?>
+				<?php } else if ($_SESSION['role'] == "USER") { ?>
 					<div class="helloUser"><?php echo $_SESSION['user_id']; ?>님 환영합니다.</div>
 					<div style="flex-grow: 1;"></div>
 					<button type='button' class='btn btn-secondary' onclick="location.href='../php/signup_process.php?mode=logout'">로그아웃</button>
 					<div style="padding: 20px;"></div>
 					<button type='button' class='btn btn-secondary' onclick="location.href='./memberModify.php'">정보 수정</button>
-			<?php } ?>
-		</nav>
+				<?php } else if ($_SESSION['role'] == "ADMIN") { ?>
+					<div class="helloUser"><?php echo "관리자 ".$_SESSION['user_id']; ?>님 환영합니다.</div>
+					<div style="flex-grow: 1;"></div>
+					<button type='button' class='btn btn-secondary' onclick="location.href='../php/signup_process.php?mode=logout'">로그아웃</button>
+					<div style="padding: 20px;"></div>
+					<button type='button' class='btn btn-secondary' onclick="location.href='./memberModify.php'">정보 수정</button>
+					<div style="padding: 20px;"></div>
+					<button type='button' class='btn btn-secondary' onclick="location.href='./adminControl.php'">사용자 관리</button>
+				<?php } ?>
+			</nav>
+		</header>
 		<div class="container">
 			<div class="main-title">
 				<h3>SG YB 게시판 입니다.</h3>
@@ -55,7 +65,7 @@
 						$page_sql->execute();
 						$reply_count = $page_sql->fetch();
 
-						$out = strlen($row['title']) > 30 ? mb_substr($row['title'], 0, 30, "UTF-8")."..." : $row['title'];
+						$out = strlen($row['title']) > 20 ? mb_substr($row['title'], 0, 20, "UTF-8")."..." : $row['title'];
 					?>
 						<li class="list-border">
 							<a href="viewBoard.php?num=<?=$row['num']?>" class="border-content"><?php echo $out; ?></a>
