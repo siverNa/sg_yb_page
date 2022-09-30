@@ -68,24 +68,31 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name = "viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<title>사용자 관리</title>
 </head>
 <body>
 	<header>
-		<?php
-			if (!isset($_SESSION['user_id']))
-			{
-				echo '<p><a href="./signup.html">회원가입(signup)</a>';
-				echo '<a href="./login.html">로그인(signin)</a></p>';
-			}
-			else
-			{
-				echo '<div class="helloUser">'.'관리자 '.$_SESSION['user_id'].'님 환영합니다.</div>';
-				echo '<div class="outAndUpdate"><a href="../php/signup_process.php?mode=logout">로그아웃 </a> | 
-				<a href="./memberModify.php">정보수정</a> | <a href="./adminControl.php">사용자 관리</a>
-				</div>';
-			}
-		?>
+		<nav class="nav-container">
+		<div style="width: 100px;"></div>
+		<img src="../img/kakao.png" alt="logo" style="width: 30px;">
+		<div class="nav-item">SG YB page</div>
+			<?php if (!isset($_SESSION['user_id'])) { ?>
+				<div style="flex-grow: 1;"></div>
+				<button type='button' class='btn btn-secondary' onclick="location.href='./signup.html'">회원가입(signup)</button>
+				<div style="padding: 20px;"></div>
+				<button type='button' class='btn btn-secondary' onclick="location.href='./login.html'">로그인</button>
+			<?php } else { ?>
+				<div class="helloUser"><?php echo "관리자 ".$_SESSION['user_id']; ?>님 환영합니다.</div>
+				<div style="flex-grow: 1;"></div>
+				<button type='button' class='btn btn-secondary' onclick="location.href='../php/signup_process.php?mode=logout'">로그아웃</button>
+				<div style="padding: 20px;"></div>
+				<button type='button' class='btn btn-secondary' onclick="location.href='./memberModify.php'">정보 수정</button>
+				<div style="padding: 20px;"></div>
+				<button type='button' class='btn btn-secondary' onclick="location.href='./adminControl.php'">사용자 관리</button>
+			<?php } ?>
+		</nav>
 	</header>
 	<div class="head">user 검색결과 | <?= $search ?></div>
 	<table>
