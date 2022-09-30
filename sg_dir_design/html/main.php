@@ -41,7 +41,7 @@
 		<div class="container">
 			<div class="main-title">
 				<h3>SG YB 게시판 입니다.</h3>
-				<p><a href="./BoardList.php">게시판으로 이동</a></p>
+				<a href="./BoardList.php" class="none-style">게시판으로 이동</a>
 			</div>
 			<div class="main-board">
 				<ul>
@@ -54,8 +54,13 @@
 						$page_sql->bindParam(':b_num', $b_num);
 						$page_sql->execute();
 						$reply_count = $page_sql->fetch();
+
+						$out = strlen($row['title']) > 30 ? mb_substr($row['title'], 0, 30, "UTF-8")."..." : $row['title'];
 					?>
-						<li class="list-border"><a href="viewBoard.php?num=<?=$row['num']?>"><?php echo $row['title']; ?></a>댓글<?php echo $reply_count['cnt']; ?></li>
+						<li class="list-border">
+							<a href="viewBoard.php?num=<?=$row['num']?>" class="border-content"><?php echo $out; ?></a>
+							<span>추천 : <?php echo $row['liked']; ?> | 댓글 : <?php echo $reply_count['cnt']; ?></span>
+						</li>
 					<?php } ?>
 				</ul>
 			</div>
