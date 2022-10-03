@@ -4,19 +4,32 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/signup.css" type="text/css">
 	<title>로그인(signin)</title>
 </head>
 <body>
-	<p><a href="./main.php">메인 페이지로 돌아가기</a></p>
-	<p>로그인(signup)</p>
-	<form action="../php/signup_process.php?mode=login" method="post">
-		<p>아이디 : <input type="text" name="user_id"></p>
-		<p>비밀번호 : <input type="password" name="user_password"></p>
-		<p>
-			<input type="submit" value="로그인">
-			<input type="button" value="취소" onclick="location.href='./main.php'">
-		</p>
-		<a href="./signup.html">회원가입</a>
-	</form>
+	<nav class="nav-container">
+		<div style="width: 100px;"></div>
+		<img src="../img/kakao.png" alt="logo" style="width: 30px;">
+		<div class="nav-item"><a href="./main.php" style="text-decoration: none; color: white">SG YB page</a></div>
+		<div style="flex-grow: 1;"></div>
+	</nav>
+	<div class="container">
+		<form class="signupbox" action="../php/signup_process.php?mode=login" method="post">
+			<div class="id-box">
+				<h3 style="font-size: 30px;">로그인</h3>
+				<span class="idtxt">아이디</span>
+				<input class="id" type="text"
+				style="width:200px;height:30px;font-size:20px;" name="user_id">
+			</div>
+			<div class="pwd-box">
+				<span class="pwdtxt">비밀번호</span>
+				<input class="pwd" type="password"
+				style="width:200px;height:30px;font-size:20px;" name="user_password">
+			</div>
+			<button class="nav-btn" type="submit">로그인</button>
+			<button class="nav-btn" type="button" onclick="location.href='./signup.html'">회원가입</button>
+		</form>
+	</div>
 </body>
 </html>
