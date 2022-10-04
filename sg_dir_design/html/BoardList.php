@@ -54,6 +54,7 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/board.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<title>게시글 목록</title>
 </head>
@@ -128,8 +129,11 @@
 			<?php } ?>
 		</tbody>
 	</table>
+	<div>
+		<a href="./writeBoard.php">글쓰기</a>
+	</div>
 	<!-- 페이징 코드 부분 -->
-	<div class=bottom>
+	<div class="bottom">
 		<?php
 			if($page > 1){
 				echo "<a href=\"BoardList.php?page=1\">[<<] </a>";
@@ -163,8 +167,7 @@
 		?>
 	</div>
 	<!-- 페이징 코드 끝 -->
-	<div><a href="./writeBoard.php">글쓰기</a></div>
-	<form action="./searchBoard.php" method="get">
+	<form class="bottom" action="./searchBoard.php" method="get">
 		<select name="category" id="search_opt" onchange="info()">
 			<option value="title">제목</option>
 			<option value="content">내용</option>
