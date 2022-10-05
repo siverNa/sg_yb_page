@@ -1,0 +1,28 @@
+/* table 
+{
+	border: 1px #a39485 solid;
+	font-size: .9em;
+	box-shadow: 0 2px 5px rgba(0,0,0,.25);
+	width: 100%;
+	border-collapse: collapse;
+	border-radius: 5px;
+	overflow: hidden;
+} */
+
+table
+{
+	border: 1px #a39485 solid;
+	box-shadow: 0 2px 5px rgba(0,0,0,.25);
+	width: 100%;
+	max-width: 90%;
+	height: 320px;
+	border-collapse: collapse;
+	/* border: 1px solid #38678f; */
+	margin: 50px auto;
+	background: white;
+}
+
+.bottom
+{
+	text-align: center;
+}
