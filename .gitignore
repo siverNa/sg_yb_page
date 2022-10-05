@@ -1,4 +1,5 @@
 db_con.php
 sg_dir/file/upload/
 .vscode
-/test.DS_Store
+/test
+.DS_Store
