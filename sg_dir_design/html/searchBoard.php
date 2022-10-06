@@ -82,6 +82,7 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/board.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<title>검색 결과</title>
 </head>
@@ -122,7 +123,7 @@
 	<?php 
 		} 
 	?>
-	<table>
+	<table class="tboard">
 		<thead>
 			<tr>
 				<th width=70>번호</th>
@@ -139,7 +140,7 @@
 				?>
 				<tr>
 					<td><?php echo $row['num']; ?></td>
-					<td><a href="viewBoard.php?num=<?=$row['num']?>"><?php echo $out; ?></a></td>
+					<td><a href="viewBoard.php?num=<?=$row['num']?>" style="text-decoration: none; color: black"><?php echo $out; ?></a></td>
 					<td><?php echo $row['user_id']; ?></td>
 					<td><?php echo $row['written']; ?></td>
 					<td><?php echo $row['hit']; ?></td>
@@ -149,11 +150,14 @@
 			</tbody>
 		<?php if (!$col_count) { ?>
 			<tbody>
-				<tr><p>검색 결과 없음</p></tr>
+				<tr>검색 결과 없음</tr>
 			</tbody>
 		<?php } ?>
 	</table>
-	<div>
+	<div class='btn btn-secondary'>
+		<a style="text-decoration: none; color: white" href="./writeBoard.php">글쓰기</a>
+	</div>
+	<div class="bottom">
 		<?php
 			if($page > 1){
 				echo "<a href=\"searchBoard.php?page=1&category=$category&search=$search&date1=$date1&date2=$date2\">[<<] </a>";
@@ -186,8 +190,7 @@
 			}
 		?>
 	</div>
-	<div><a href="./writeBoard.php">글쓰기</a></div>
-	<form action="./searchBoard.php" method="get">
+	<form class="bottom" action="./searchBoard.php" method="get">
 		<select name="category" id="search_opt" onchange="info()">
 			<option value="title">제목</option>
 			<option value="content">내용</option>

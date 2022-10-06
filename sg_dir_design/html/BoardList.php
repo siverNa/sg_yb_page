@@ -86,7 +86,7 @@
 			<?php } ?>
 		</nav>
 	</header>
-	<table>
+	<table class="tboard">
 		<thead>
 			<tr>
 				<th width=70>번호</th>
@@ -116,7 +116,7 @@
 			?>
 			<tr>
 				<td><?php echo $row['num']; ?></td>
-				<td><a href="viewBoard.php?num=<?=$row['num']?>"><?php echo $out; ?></a></td>
+				<td><a href="viewBoard.php?num=<?=$row['num']?>" style="text-decoration: none; color: black"><?php echo $out; ?></a></td>
 				<td><?php echo $row['user_id']; ?></td>
 				<td><?php echo $row['written']; ?></td>
 				<td><?php echo $row['hit']; ?></td>
@@ -129,8 +129,8 @@
 			<?php } ?>
 		</tbody>
 	</table>
-	<div>
-		<a href="./writeBoard.php">글쓰기</a>
+	<div class='btn btn-secondary'>
+		<a style="text-decoration: none; color: white" href="./writeBoard.php">글쓰기</a>
 	</div>
 	<!-- 페이징 코드 부분 -->
 	<div class="bottom">
