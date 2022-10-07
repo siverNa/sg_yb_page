@@ -15,6 +15,15 @@
 	$sql->execute();
 	$row = $sql->fetch();
 
+	/* 댓글 수를 가져오는 코드 */
+	$b_num = $row['num'];
+	$page_sql = $connect->prepare("
+		SELECT COUNT(*) AS cnt FROM reply WHERE board_num=:b_num
+	");
+	$page_sql->bindParam(':b_num', $b_num);
+	$page_sql->execute();
+	$reply_count = $page_sql->fetch();
+
 	if ($_SESSION['user_id'] != $row['user_id'])
 	{
 		$hit_sql = $connect->prepare("
@@ -60,6 +69,7 @@
 	</script>
 	<title>게시글 목록</title>
 	<link rel="stylesheet" type="text/css" href="../css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/board.css?after">
 </head>
 <body>
 	<header>
@@ -90,12 +100,21 @@
 		</nav>
 	</header>
 	<section>
-		<div><?= $row['title'] ?></div>
+		<div class="view_title"><?= $row['title'] ?></div>
 		<div>
-			<div><?= $row['user_id'] ?></div>
-			<div><?= $row['written'] ?></div>
-			<p><div class="hit"> 조회수 <?=$row['hit']; ?></div></p>
-
+			<div class="view_info">
+				<div class="view_member"><?= $row['user_id'] ?></div>
+				<div class="view_attr">
+					<span class="s_head">추천수 </span>
+					<span class="s_body" style="color: #2356FF;"><?=$row['liked']  ?></span> |
+					<span class="s_head">댓글 </span>
+					<span class="s_body"><?=$reply_count['cnt'] ?></span> |
+					<span class="s_head">조회수 </span>
+					<span class="s_body"><?=$row['hit']; ?></span> |
+					<span class="s_head">작성일 </span>
+					<span class="s_body"><?= $row['written'] ?></span>
+				</div>
+			</div>
 		</div>
 		<div class="viewContent">
 			<?php

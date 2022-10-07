@@ -47,3 +47,44 @@
 {
 	text-align: center;
 }
+
+/* section 태그 */
+section
+{
+	margin: 50px 50px 50px 50px;
+	font-family: 'Jeju Gothic';
+	overflow: auto;
+}
+
+.view_title
+{
+	padding: 0.5rem 0.75rem;
+	font-size: 1.1rem;
+	border-bottom: 1px solid;
+	background-color: #f0f0f0;
+}
+
+.view_info
+{
+	padding: 0.35rem 0.75rem 0.3rem;
+	border-bottom: 1px solid;
+}
+
+.view_member
+{
+	display: inline-block;
+	font-size: .9rem;
+}
+
+.view_attr
+{
+	display: inline-block;
+	float: right;
+	font-size: .8rem;
+    line-height: 1.4rem;
+}
+
+.view_attr .s_body
+{
+	background-color: #eee;
+}
