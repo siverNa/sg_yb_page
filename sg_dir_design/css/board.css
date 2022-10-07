@@ -1,3 +1,20 @@
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+.head
+{
+	margin-left: 5%;
+	font-family: 'Jeju Gothic';
+}
+
+.board_title a
+{
+	text-decoration: none;
+	color: black;
+	font-size: 40px;
+	font-family: 'Jeju Gothic';
+	margin-left: 5%;
+}
+
 .tboard
 {
 	border: 1px #a39485 solid;

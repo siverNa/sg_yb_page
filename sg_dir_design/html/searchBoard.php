@@ -81,8 +81,8 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../css/style.css">
-	<link rel="stylesheet" href="../css/board.css">
+	<link rel="stylesheet" href="../css/style.css?after">
+	<link rel="stylesheet" href="../css/board.css?after">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<title>검색 결과</title>
 </head>
@@ -114,6 +114,7 @@
 			<?php } ?>
 		</nav>
 	</header>
+	<div class="board_title"><a href="./BoardList.php">게시판</a></div>
 	<div class="head">검색결과 | <?= $category ?> | <?= $search ?></div>
 	<?php
 		if ($date1 && $date2)
@@ -148,11 +149,6 @@
 				</tr>
 				<?php } ?>
 			</tbody>
-		<?php if (!$col_count) { ?>
-			<tbody>
-				<tr>검색 결과 없음</tr>
-			</tbody>
-		<?php } ?>
 	</table>
 	<div class='btn btn-secondary'>
 		<a style="text-decoration: none; color: white" href="./writeBoard.php">글쓰기</a>
