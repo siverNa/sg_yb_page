@@ -39,7 +39,8 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link rel="stylesheet" type="text/css" href="../css/board.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<script>
 		function confirm_delete(text)
@@ -67,9 +68,7 @@
 				con.style.display = 'none';
 		}
 	</script>
-	<title>게시글 목록</title>
-	<link rel="stylesheet" type="text/css" href="../css/style.css" />
-	<link rel="stylesheet" type="text/css" href="../css/board.css?after">
+	<title>게시글 목록</title>	
 </head>
 <body>
 	<header>
@@ -100,8 +99,10 @@
 		</nav>
 	</header>
 	<section>
+		<!-- 제목 부분 -->
 		<div class="view_title"><?= $row['title'] ?></div>
 		<div>
+			<!-- 제목 밑 작성자 정보 표시 -->
 			<div class="view_info">
 				<div class="view_member"><?= $row['user_id'] ?></div>
 				<div class="view_attr">
@@ -114,39 +115,42 @@
 					<span class="s_head">작성일 </span>
 					<span class="s_body"><?= $row['written'] ?></span>
 				</div>
-			</div>
+			</div><!-- 제목 밑 작성자 정보 표시 끝 -->
 		</div>
 		<div class="viewContent">
 			<?php
 				if (!$row['file'])
 				{}
 				else
-					echo "<img src='../file/upload/$row[file]'></img></br>";
+					echo "<img class='img' src='../file/upload/$row[file]'></img></br>";
 			?>
 			<?= nl2br($row['content']) ?>
-		</div>
-		<p><div class="liked"> 추천 <?=$row['liked']; ?></div></p>
-			<?php if ($_SESSION['user_id'] != $row['user_id']) { ?>
-				<div class=mine>
-					<button class=like type="button" onclick="window.location.href='../php/like_ok.php?num=<?=$num ?>'">추천하기</button>
-					<button class=like type="button" onclick="window.location.href='../php/unlike_ok.php?num=<?=$num ?>'">취소</button>
-				</div>
-			<?php } ?>
-		<p class="file"><a href="../file/upload/<?=$row['file']; ?>" download><?=$row['file']; ?></a></p>
-		<div><a href="./BoardList.php">목록으로</a></div>
-		<?php
-			if ($row['user_id'] == $_SESSION['user_id'] || $_SESSION['role'] == "ADMIN")
-			{
-		?>
-			<div>
-				<a href="./updateBoard.php?num=<?= $row['num'] ?>">수정</a>
-				<a href="#" onclick="confirm_delete('정말로 삭제하시겠습니까?')">삭제</a>
+			<div class="liked"> 추천 <?=$row['liked']; ?>
+				<?php if ($_SESSION['user_id'] != $row['user_id']) { ?>
+					<div class="mine">
+						<button class="like" id="likeUp" type="button" onclick="window.location.href='../php/like_ok.php?num=<?=$num ?>'">추천하기</button>
+						<button class="like" id="likeDown" type="button" onclick="window.location.href='../php/unlike_ok.php?num=<?=$num ?>'">취소</button>
+					</div>
+				<?php } ?>
 			</div>
-		<?php	
-			}
-			else
-			{} 
-		?>
+			<div class="file">이미지 목록 | <a href="../file/upload/<?=$row['file']; ?>" download><?=$row['file']; ?></a></div>
+			<div class="underMenu">
+				<?php
+				if ($row['user_id'] == $_SESSION['user_id'] || $_SESSION['role'] == "ADMIN")
+				{
+				?>
+					<!-- <div> -->
+						<a class="modify" href="./updateBoard.php?num=<?= $row['num'] ?>">수정</a>
+						<a class="delete" href="#" onclick="confirm_delete('정말로 삭제하시겠습니까?')">삭제</a>
+					<!-- </div> -->
+				<?php	
+					}
+					else
+					{} 
+				?>
+				<a class="goList" href="./BoardList.php">목록으로</a>
+			</div>
+		</div>
 		<!-- 댓글 불러오기 -->
 		<div class="reply_view">
 			<h3>댓글</h3>

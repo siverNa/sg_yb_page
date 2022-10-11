@@ -1,8 +1,14 @@
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+body
+{
+	font-family: 'Jeju Gothic';
+}
+
 /* 댓글 */
 /* html id 는 #을, class는 . 으로 지정! */
 .reply_view {
 	width: 900px;
-	margin-top: 100px; 
 	word-break: break-all;
 }
 .reply_log {

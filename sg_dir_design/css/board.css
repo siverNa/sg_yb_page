@@ -1,5 +1,10 @@
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 
+body a
+{
+	text-decoration: none;
+}
+
 .head
 {
 	margin-left: 5%;
@@ -28,19 +33,19 @@
 }
 
 .tboard tr th {
-    background-color: cornflowerblue;
-    color: #fff;
+	background-color: cornflowerblue;
+	color: #fff;
 }
 
 .tboard tr {
-    border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #eee;
 }
 .tboard tr:last-child {
-    border: none;
+	border: none;
 }
 
 .tboard tr:nth-child(odd) {
-    background-color: rgba(221, 221, 221, 0.338);
+	background-color: rgba(221, 221, 221, 0.338);
 }
 
 .bottom
@@ -81,10 +86,93 @@ section
 	display: inline-block;
 	float: right;
 	font-size: .8rem;
-    line-height: 1.4rem;
+	line-height: 1.4rem;
 }
 
 .view_attr .s_body
 {
 	background-color: #eee;
+}
+
+/* 게시글 내용 부분 */
+
+.viewContent
+{
+	max-width: 100%;
+	padding: 0.8rem;
+	/*
+		break-all 속성값은 어절이 유지되지 않고 끊어져서 줄바꿈된다.
+	*/
+	word-break: break-all;
+	/*
+		overflow 넘칠경우 스크롤바가 자동으로 생깁니다. 가로/세로 필요한 부분에만 생깁니다.
+	*/
+	overflow-x: auto;
+}
+
+.img
+{
+	display: block;
+	margin: auto;
+}
+
+.liked
+{
+	margin: 2rem 0 0.5rem;
+	text-align: center;
+	clear: both;
+}
+
+.like
+{
+	width: 100px;
+	height: 50px;
+	display: inline-block;
+}
+
+#likeUp
+{
+	margin-right: 5px;
+}
+
+#likeDown
+{
+	margin-left: 5px;
+}
+
+.file
+{
+	border-top: 1px solid;
+	border-color: #ddd;
+	padding: 1rem;
+}
+
+.underMenu
+{
+	text-align: right;
+	font-size: 1rem;
+	padding: 0.5rem 0.75rem;
+	border-top: 1px solid;
+	border-color: #ddd;
+}
+
+.modify
+{
+	background-color: gray;
+	padding: 0.5rem;
+	color: white;
+}
+
+.delete
+{
+	background-color: rgb(228, 69, 69);
+	padding: 0.5rem;
+	color: white;
+}
+
+.goList
+{
+	background-color: gray;
+	padding: 0.5rem;
+	color: white;
 }
