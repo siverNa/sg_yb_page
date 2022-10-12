@@ -25,10 +25,10 @@ body
 .reply_log {
 	box-sizing: border-box;
 	font-size: 14px;
-	padding: 0.75rem;
-	border-bottom: solid 0.5px gray;
 	margin-bottom: 0.9rem;
 	word-break: break-all;
+	border: 1px solid;
+	border-color: #bbb;
 }
 
 .reply_top
@@ -46,11 +46,20 @@ body
 	box-sizing: border-box;
 }
 
-.reply_time
+.reply_right
 {
 	float: right;
 	display: flex;
 	flex-wrap: wrap;
+}
+
+.reply_right .sep::before
+{
+	content: '|';
+	font-size: 1.1em;
+	font-weight: 300;
+	margin: 0 0.5em;
+	line-height: .9em;
 }
 
 .dap_to {

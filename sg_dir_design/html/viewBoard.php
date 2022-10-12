@@ -167,15 +167,19 @@
 				<div class="reply_log">
 					<div class="reply_top">
 						<b><?=$r_row['user_id'];?></b>
-						<div class="reply_time"><?php echo $r_row['date']; ?></div>
+						<div class="reply_right">
+							<?php echo $r_row['date']; ?>
+							<?php if ($r_row['user_id'] == $_SESSION['user_id'] || $_SESSION['role'] == "ADMIN") { ?>
+								<span class="sep"></span>
+								<div class="rep_me">
+									<span type="button" id="reply_edit_bt" onclick="edit_show_hide('<?=$r_row['idx'];?>');">수정</span>
+									<span class="sep"></span>
+									<span type="button" id="reply_delete_bt" onclick="delete_show_hide('<?=$r_row['idx'];?>');">삭제</span>
+								</div>
+							<?php } ?>
+						</div>
 					</div>
 					<div class="dap_to"><?php echo nl2br("$r_row[content]"); ?></div>
-					<?php if ($r_row['user_id'] == $_SESSION['user_id'] || $_SESSION['role'] == "ADMIN") { ?>
-					<div class="rep_me">
-						<button type="button" id="reply_edit_bt" onclick="edit_show_hide('<?=$r_row['idx'];?>');">수정</button>
-						<button type="button" id="reply_delete_bt" onclick="delete_show_hide('<?=$r_row['idx'];?>');">삭제</button>
-					</div>
-					<?php } ?>
 					<!-- 댓글 수정 폼 -->
 					<div id="reply_edit_<?=$r_row['idx']; ?>" style="display:none">
 						<form action="../php/reply_modify_ok.php" method="post">
