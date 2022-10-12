@@ -180,43 +180,59 @@
 						</div>
 					</div>
 					<div class="dap_to"><?php echo nl2br("$r_row[content]"); ?></div>
-					<!-- 댓글 수정 폼 -->
-					<div id="reply_edit_<?=$r_row['idx']; ?>" style="display:none">
+				</div>
+				<!-- 댓글 수정 폼 -->
+				<div class="reply_edit_form" id="reply_edit_<?=$r_row['idx']; ?>" style="display:none">
+					<div class="reply_edit_container">
+						<div class="reply_edit_info">
+							<?=$r_row['user_id'];?>
+						</div>
 						<form action="../php/reply_modify_ok.php" method="post">
 							<input type="hidden" name="user_id" value="<?=$r_row['user_id']; ?>">
 							<input type="hidden" name="board_num" value="<?=$num; ?>">
 							<input type="hidden" name="reply_num" value="<?=$r_row['idx']; ?>">
-							<textarea name="content" cols="30" rows="10"><?php echo $r_row['content']; ?></textarea>
-							<p>
-								<input type="submit" value="수정하기">
-								<button type="button" onclick="edit_show_hide('<?=$r_row['idx'];?>');">취소</button>	
-							</p>
+							<div class="reply_edit_textarea_wrapper">
+								<textarea class="reply_edit_textarea" name="content"><?php echo $r_row['content']; ?></textarea>
+								<div class="reply_edit_button_wrapper">
+									<input class="reply_edit_button" type="submit" value="수정하기">
+									<button class="reply_edit_button" type="button" onclick="edit_show_hide('<?=$r_row['idx'];?>');">취소</button>
+								</div>
+							</div>
 						</form>
 					</div>
-					<!-- 댓글 삭제 폼 -->
-					<div id="reply_delete_<?=$r_row['idx']; ?>" style="display:none">
-						<form action="../php/reply_delete_ok.php" method="post">
-							<input type="hidden" name="reply_num" value="<?=$r_row['idx']; ?>">
-							<input type="hidden" name="board_num" value="<?=$num; ?>">
-							<p>
-								<input type="submit" value="삭제하기">
-								<button type="button" onclick="delete_show_hide('<?=$r_row['idx'];?>');">취소</button>	
-							</p>
-						</form>
-					</div>
+				</div>
+				<!-- 댓글 삭제 폼 -->
+				<div id="reply_delete_<?=$r_row['idx']; ?>" style="display:none">
+					<form action="../php/reply_delete_ok.php" method="post">
+						<input type="hidden" name="reply_num" value="<?=$r_row['idx']; ?>">
+						<input type="hidden" name="board_num" value="<?=$num; ?>">
+						<p>
+							<input type="submit" value="삭제하기">
+							<button type="button" onclick="delete_show_hide('<?=$r_row['idx'];?>');">취소</button>	
+						</p>
+					</form>
 				</div>
 			<?php } ?>
 			
 			<!-- 댓글 작성 -->
-			<div class="reply_write">
-				<form action="../php/reply_ok.php?board_num=<?=$row['num']; ?>" method="post">
-					<?php if ($_SESSION['user_id']) { ?>
-						<div style="margin-top:10px; ">
-							<textarea name="content" id="reply_content"></textarea>
-							<button id="reply_button" class="rp_bt">댓글</button>
-						</div>
-					<?php } ?>
-				</form>
+			<div class="reply_edit_form reply_write">
+				<div class="reply_edit_container">
+					<div class="reply_edit_info">
+						<?php if ($_SESSION['user_id']) { ?>
+							<?=$_SESSION['user_id'];?>
+						<?php } ?>
+					</div>
+					<form action="../php/reply_ok.php?board_num=<?=$row['num']; ?>" method="post">
+						<?php if ($_SESSION['user_id']) { ?>
+							<div class="reply_edit_textarea_wrapper">
+								<textarea class="reply_edit_textarea" name="content"></textarea>
+								<div class="reply_edit_button_wrapper">
+									<button class="reply_edit_button" id="reply_button">작성</button>
+								</div>
+							</div>
+						<?php } ?>
+					</form>
+				</div>
 			</div>
 		</div><!-- 댓글 불러오기 끝 -->
 	</section>
