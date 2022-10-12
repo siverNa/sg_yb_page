@@ -153,7 +153,7 @@
 		</div>
 		<!-- 댓글 불러오기 -->
 		<div class="reply_view">
-			<h3>댓글</h3>
+			<div class="reply_title">댓글</div>
 			<?php
 				$r_sql = $connect->prepare("
 					SELECT * FROM reply
@@ -165,9 +165,11 @@
 				while ($r_row = $r_sql->fetch()) {
 			?>
 				<div class="reply_log">
-					<div><b><?=$r_row['user_id'];?></b></div>
+					<div class="reply_top">
+						<b><?=$r_row['user_id'];?></b>
+						<div class="reply_time"><?php echo $r_row['date']; ?></div>
+					</div>
 					<div class="dap_to"><?php echo nl2br("$r_row[content]"); ?></div>
-					<div class="dap_to rep_me"><?php echo $r_row['date']; ?></div>
 					<?php if ($r_row['user_id'] == $_SESSION['user_id'] || $_SESSION['role'] == "ADMIN") { ?>
 					<div class="rep_me">
 						<button type="button" id="reply_edit_bt" onclick="edit_show_hide('<?=$r_row['idx'];?>');">수정</button>
