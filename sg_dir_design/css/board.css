@@ -176,3 +176,15 @@ section
 	padding: 0.5rem;
 	color: white;
 }
+
+/* 글쓰기 스타일 */
+.write_head
+{
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	border-color: #bbb;
+	padding: 0.5rem 0.75rem;
+	margin-bottom: 1rem;
+	margin-top: 1rem;
+	font-size: 2rem;
+}

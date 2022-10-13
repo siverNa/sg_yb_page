@@ -10,8 +10,34 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link rel="stylesheet" type="text/css" href="../css/board.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	
+	<!-- include libraries(jQuery, bootstrap) -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+	
+	<script src="../js/summernote/summernote-lite.js"></script>
+	<script src="../js/summernote/lang/summernote-ko-KR.js"></script>
+
+	<link rel="stylesheet" href="../css/summernote/summernote-lite.css">
+
+	<script>
+		$(document).ready(function() {
+			//여기 아래 부분
+			$('#summernote').summernote({
+				height: 300,                 // 에디터 높이
+				minHeight: null,             // 최소 높이
+				maxHeight: null,             // 최대 높이
+				focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+				lang: "ko-KR",					// 한글 설정
+				placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정	
+			});
+		});
+	</script>
+	
 	<title>게시글 작성</title>
 </head>
 <body>
@@ -42,13 +68,14 @@
 			<?php } ?>
 		</nav>
 	</header>
-	<h2>글 작성</h2>
+	<div class="write_head">글쓰기</div>
 	<form action="../php/board_process.php?mode=write" method="post" enctype="multipart/form-data">
 		<!--<input type="hidden" name="type" value="board">-->
 		<input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
 		<p><input type="text" name="title" placeholder="제목" required></p>
 		<p><input type="file" name="file" id="input_file"></p>
-		<textarea name="content" cols="100" rows="50" placeholder="본문" required></textarea>
+		<!-- <textarea name="content" cols="100" rows="50" placeholder="본문" required></textarea> -->
+		<textarea id="summernote" name="content"></textarea>
 		<div>
 			<input type="submit" value="글쓰기">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" value="취소" onclick="history.back(1)">
