@@ -72,13 +72,18 @@
 	<form action="../php/board_process.php?mode=write" method="post" enctype="multipart/form-data">
 		<!--<input type="hidden" name="type" value="board">-->
 		<input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
-		<p><input type="text" name="title" placeholder="제목" required></p>
+		<div class="title_group">
+			<div class="title_group_front">
+				<span class="title_group_text">제목</span>
+			</div>
+			<input class="title_input" type="text" name="title" required>
+		</div>
 		<p><input type="file" name="file" id="input_file"></p>
-		<!-- <textarea name="content" cols="100" rows="50" placeholder="본문" required></textarea> -->
+		<!-- summernote 에디터 -->
 		<textarea id="summernote" name="content"></textarea>
-		<div>
-			<input type="submit" value="글쓰기">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" value="취소" onclick="history.back(1)">
+		<div class="write_button_wrapper">
+			<input class="write_edit_button" type="submit" value="작성">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input class="write_edit_button" type="button" value="취소" onclick="history.back(1)">
 		</div>
 	</form>
 </body>

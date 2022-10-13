@@ -188,3 +188,61 @@ section
 	margin-top: 1rem;
 	font-size: 2rem;
 }
+
+.title_group
+{
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.title_group_front
+{
+	display: flex;
+}
+
+.title_group_text
+{
+	padding: 0.25rem 0.5rem;
+	font-size: 2rem;
+	line-height: 1.5;
+	border-radius: 0;
+	text-align: center;
+	background-color: #eee;
+	border: 1px solid #ced4da;
+}
+
+.title_input
+{
+	padding: 0.25rem 0.5rem;
+	font-size: 2rem;
+	line-height: 1.5;
+	border-radius: 0;
+	position: relative;
+	flex: 1 1 auto;
+	border: 1px solid #ced4da;
+}
+
+.write_button_wrapper
+{
+	position: absolute;
+	right: 0;
+	justify-content: flex-end;
+	padding-bottom: 0.5em;
+	padding-right: 0.5em;
+	margin-top: 1rem;
+}
+
+.write_edit_button
+{
+	padding: 0.25em 1.5em;
+	border: 1px solid;
+	border-color: #bbb;
+	background-color: #fff;
+	border-radius: 4px;
+	color: #000;
+	transition-duration: .3s;
+}
