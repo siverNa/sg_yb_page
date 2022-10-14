@@ -36,6 +36,38 @@
 				placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정	
 			});
 		});
+
+		function summit() {
+			const button = event.srcElement;
+			button.disabled = true;
+
+			// user_id, content를 가지고와서 formdata 로 전송
+			const user_id = document.getElementById('user_id').value;
+			const title = document.getElementById('title').value;
+			const content = $('#summernote').summernote('code');
+
+			const formData = new FormData;
+			formData.append("user_id", user_id);
+			formData.append("title", title);
+			formData.append("content", content);
+			console.log(content);
+
+			const httpRequest = new XMLHttpRequest();
+			httpRequest.onreadystatechange = () => {
+				if (httpRequest.readyState === XMLHttpRequest.DONE) {
+					if (httpRequest.status === 200) {
+						console.log(httpRequest.response);
+						location.href = "./BoardList.php";
+					} else {
+						alert("게시물 등록중 오류가 발생했습니다.");
+						button.disabled = false;
+					}
+				}
+			}
+			httpRequest.open('post', '../php/Board_process.php?mode=write', true);
+			httpRequest.send(formData);
+
+			}
 	</script>
 	
 	<title>게시글 작성</title>
@@ -69,8 +101,8 @@
 		</nav>
 	</header>
 	<div class="write_head">글쓰기</div>
-	<form action="../php/board_process.php?mode=write" method="post" enctype="multipart/form-data">
-		<!--<input type="hidden" name="type" value="board">-->
+	<!-- <form action="../php/board_process.php?mode=write" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="type" value="board">
 		<input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
 		<div class="title_group">
 			<div class="title_group_front">
@@ -79,12 +111,27 @@
 			<input class="title_input" type="text" name="title" required>
 		</div>
 		<p><input type="file" name="file" id="input_file"></p>
-		<!-- summernote 에디터 -->
+		summernote 에디터
 		<textarea id="summernote" name="content"></textarea>
 		<div class="write_button_wrapper">
 			<input class="write_edit_button" type="submit" value="작성">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input class="write_edit_button" type="button" value="취소" onclick="history.back(1)">
 		</div>
-	</form>
+	</form> -->
+	<div>
+		<input type="hidden" id="user_id" name="user_id" value="<?= $_SESSION['user_id'] ?>">
+		<div class="title_group">
+			<div class="title_group_front">
+				<span class="title_group_text">제목</span>
+			</div>
+			<input class="title_input" id="title" type="text" name="title" required>
+		</div>
+		<!-- summernote 에디터 -->
+		<textarea id="summernote" name="content"></textarea>
+		<div class="write_button_wrapper">
+			<button class="write_edit_button" onclick="summit()">작성</button>
+			<button class="write_edit_button" onclick="history.back(1)">취소</button>
+		</div>
+	</div>
 </body>
 </html>
