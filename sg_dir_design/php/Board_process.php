@@ -9,7 +9,7 @@
 				errPwMsg("로그인을 먼저 해주십시오.");
 			else
 			{
-				$mediaBaseUrl = 'http://localhost/sg_yb_page/sg_yb_design/file/upload/';
+				$mediaBaseUrl = 'http://localhost/sg_yb_page/sg_dir_design/file/upload/';
 				$mediaRoot = '../file/upload/';
 
 				//$type = $_POST['type'];

@@ -118,12 +118,12 @@
 			</div><!-- 제목 밑 작성자 정보 표시 끝 -->
 		</div>
 		<div class="viewContent">
-			<?php
+			<!-- <?php
 				if (!$row['file'])
 				{}
 				else
 					echo "<img class='img' src='../file/upload/$row[file]'></img></br>";
-			?>
+			?> -->
 			<?= nl2br($row['content']) ?>
 			<div class="liked"> 추천 <?=$row['liked']; ?>
 				<?php if ($_SESSION['user_id'] != $row['user_id']) { ?>
