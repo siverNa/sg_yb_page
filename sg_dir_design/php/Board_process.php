@@ -9,7 +9,7 @@
 				errPwMsg("로그인을 먼저 해주십시오.");
 			else
 			{
-				$mediaBaseUrl = 'localhost/sg_yb_page/sg_dir_design/file/upload/';
+				$mediaBaseUrl = 'http://localhost/sg_yb_page/sg_yb_design/file/upload/';
 				$mediaRoot = '../file/upload/';
 
 				//$type = $_POST['type'];
@@ -17,42 +17,6 @@
 				$user_id = $_POST['user_id'];
 				$title = $_POST['title'];
 				$content = $_POST['content'];
-				//파일 정보 변수들
-				// if ($_FILES['file']['name'])
-				// {
-				// 	$error = $_FILES['file']['error'];
-				// 	$tmp_file = $_FILES['file']['tmp_name'];
-				// 	$file_name = $_FILES['file']['name'];
-				// 	$iconv_file_name = iconv("UTF-8", "EUC-KR", $_FILES['file']['name']);
-				// 	$file_size = $_FILES['file']['size'];
-				// 	$file_type = $_FILES['file']['type'];
-				// 	$dir = "../file/upload/".$iconv_file_name;
-
-				// 	$imgFullName = strtolower($_FILES['file']['name']);
-				// 	$imgNameSlice = explode('.', $imgFullName);
-				// 	$imgName = $imgNameSlice[0];//파일명
-				// 	$imgType = $imgNameSlice[1];//확장자
-				// 	//파일 확장자 관리 배열
-				// 	$image_can_type = array('jpg', 'jpeg', 'gif', 'png');
-				// 	if (array_search($imgType, $image_can_type) === false)
-				// 		errPwMsg('jpg, jpeg, gif, png 확장자만 가능합니다.');
-
-				// 	if ($error != UPLOAD_ERR_OK)
-				// 	{
-				// 		switch ($error)
-				// 		{
-				// 			case UPLOAD_ERR_INI_SIZE :
-				// 				break;
-				// 			case UPLOAD_ERR_FORM_SIZE :
-				// 				echo "<script>alert('파일이 너무 큽니다.');";
-				// 				echo "window.history.back()</script>";
-				// 				exit;
-				// 				break;
-				// 		}
-				// 	}
-				// 	else
-				// 		move_uploaded_file($tmp_file, $dir);
-				// }
 
 				if (isset($_FILES['files'])) {
 
@@ -67,7 +31,6 @@
 						$extension = explode('/', $files['type'][$i])[1];
 						$filePath = $filename . '.' . $extension;
 				
-						// 해당 코드는 해킹 위험이 있습니다.
 						// 관련 블로그 글( https://mytory.net/archives/3011 )
 						// 파일 업로드 성공했다면
 						if (move_uploaded_file($files['tmp_name'][$i], $mediaRoot . $filePath)) {
