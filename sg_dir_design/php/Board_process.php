@@ -17,6 +17,7 @@
 				$user_id = $_POST['user_id'];
 				$title = $_POST['title'];
 				$content = $_POST['content'];
+				$fileNameArray = array();
 
 				if (isset($_FILES['files'])) {
 
@@ -36,7 +37,8 @@
 						if (move_uploaded_file($files['tmp_name'][$i], $mediaRoot . $filePath)) {
 							// 기존 경로값을 서버의 파일 경로로 변경.
 							$content = str_replace($filename, $mediaBaseUrl . $filePath, $content);
-				
+							array_push($fileNameArray, $filePath);
+							$arrayString = implode(',', $fileNameArray);
 							// 파일 업로드 실패했다면
 						} else {
 							// 에러는 번호로 나옴. 구글 검색해볼 것.
@@ -53,7 +55,7 @@
 				$sql->bindParam(':user_id', $user_id);
 				$sql->bindParam(':title', $title);
 				$sql->bindParam(':content', $content);
-				$sql->bindParam(':file_name', $filePath);
+				$sql->bindParam(':file_name', $arrayString);
 				$sql->execute();
 				
 				//성공적으로 insert 되었다면, 해당 게시물 num값을 클라이언트에 보내줌
@@ -89,10 +91,14 @@
 			$row = $sql->fetch();
 			if ($row['file'] != NULL)
 			{
-				if (!unlink("../file/upload/".$row['file']))
+				$fileArray = explode(',', $row['file']);
+				for ($i = 0; $i < count($fileArray); $i++)
 				{
-					echo "파일 삭제하는 데 문제가 생겼습니다. 관리자에게 문의하십시오.";
-					exit;
+					if (!unlink("../file/upload/".$fileArray[$i]))
+					{
+						echo "파일 삭제하는 데 문제가 생겼습니다. 관리자에게 문의하십시오.";
+						exit;
+					}
 				}
 			}
 
