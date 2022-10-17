@@ -133,7 +133,19 @@
 					</div>
 				<?php } ?>
 			</div>
-			<div class="file">이미지 목록 | <a href="../file/upload/<?=$row['file']; ?>" download><?=$row['file']; ?></a></div>
+			<div class="file">이미지 목록 |
+				<?php 
+					if ($row['file'])
+					{
+						$fileArray = explode(',', $row['file']);
+						for ($i = 0; $i < count($fileArray); $i++)
+						{
+							echo "<a href='../file/upload/$fileArray[$i]' download>".$fileArray[$i]."</a>";
+							echo "<br>";
+						}
+					}
+				?> 
+			</div>
 			<div class="underMenu">
 				<?php
 				if ($row['user_id'] == $_SESSION['user_id'] || $_SESSION['role'] == "ADMIN")
