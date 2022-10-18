@@ -61,6 +61,7 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name = "viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/board.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<title>사용자 관리</title>
 </head>
@@ -69,7 +70,7 @@
 		<nav class="nav-container">
 		<div style="width: 100px;"></div>
 		<img src="../img/kakao.png" alt="logo" style="width: 30px;">
-		<div class="nav-item">SG YB page</div>
+		<div class="nav-item"><a href="./main.php" style="text-decoration: none; color: white">SG YB page</a></div>
 			<?php if (!isset($_SESSION['user_id'])) { ?>
 				<div style="flex-grow: 1;"></div>
 				<button type='button' class='btn btn-secondary' onclick="location.href='./signup.html'">회원가입(signup)</button>
@@ -82,11 +83,12 @@
 				<div style="padding: 20px;"></div>
 				<button type='button' class='btn btn-secondary' onclick="location.href='./memberModify.php'">정보 수정</button>
 				<div style="padding: 20px;"></div>
-				<button type='button' class='btn btn-secondary' onclick="location.href='./adminControl.php'">사용자 관리</button>
+				<button type='button' class='btn btn-secondary' onclick="location.href='./adminControl.php'">관리자 페이지</button>
 			<?php } ?>
 		</nav>
 	</header>
-	<table>
+	<div class="board_title"><a href="./adminControl.php">관리자 페이지</a></div>
+	<table class="tboard" style="text-align: center;">
 		<thead>
 			<tr>
 				<th width=100>User Id</th>
@@ -154,7 +156,7 @@
 		?>
 	</div>
 	<!-- 페이징 코드 끝 -->
-	<form action="./adminSearch.php" method="get">
+	<form class="bottom" action="./adminSearch.php" method="get">
 		<input class="textform" type="text" name="search_user" id="search_box" autocomplete="off" placeholder="유저명을 입력해주세요." required>
 		<input class="submit" type="submit" value="검색">
 	</form>
