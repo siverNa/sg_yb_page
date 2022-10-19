@@ -15,8 +15,9 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 		<meta name = "viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="../css/style.css">
+		<link rel="stylesheet" href="../css/signup.css" type="text/css">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-		<title>main page</title>
+		<title>회원정보 수정</title>
 	</head>
 	<body>
 		<header>
@@ -48,30 +49,34 @@
 		</header>
 		<section>
 			<div class="mainSection">
-				<div class="updateTitle">회원정보 수정</div>
-				<form action="../php/signup_process.php?mode=update" method="post">
+				<div style="font-size: 30px;">회원정보 수정</div>
+				<form class="signupbox" action="../php/signup_process.php?mode=update" method="post">
 					<input type="hidden" name="user_id" value="<?= $row['user_id']; ?>">
 					<table class="updateTable">
-						<tr>
-							<td>아이디</td>
-							<td><?= $row['user_id']; ?></td>
+						<tr class="id-box">
+							<td class="idtxt">아이디</td>
+							<td class="id"
+							style="width:200px;height:30px;font-size:20px;"><?= $row['user_id']; ?></td>
+						</tr>
+						<tr class="pwd-box">
+							<td class="pwdtxt">현재 비밀번호</td>
+							<td class="pwd"
+							style="width:200px;height:30px;font-size:20px;"><input type="password" name="prevPw"></td>
 						</tr>
 						<tr>
-							<td>현재 비밀번호</td>
-							<td><input type="password" name="prevPw"></td>
+							<td class="pwdtxt">새 비밀번호</td>
+							<td class="pwd"
+							style="width:200px;height:30px;font-size:20px;"><input type="password" name="newPw1"></td>
 						</tr>
 						<tr>
-							<td>새 비밀번호</td>
-							<td><input type="password" name="newPw1"></td>
+							<td class="pwdtxt">새 비밀번호 확인</td>
+							<td class="pwd"
+							style="width:200px;height:30px;font-size:20px;"><input type="password" name="newPw2"></td>
 						</tr>
-						<tr>
-							<td>새 비밀번호 확인</td>
-							<td><input type="password" name="newPw2"></td>
-						</tr>
-					</table>
+				</table>
 					<div class="updateButtons">
-						<input type="submit" value="수정하기">
-						<input type="button" value="취소" onclick="history.back()">
+						<input class="nav-btn" type="submit" value="수정하기">
+						<input class="nav-btn" type="button" value="취소" onclick="history.back()">
 					</div>
 				</form>
 			</div>

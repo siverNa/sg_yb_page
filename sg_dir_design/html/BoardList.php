@@ -2,6 +2,11 @@
 	require_once('../php/db_con.php');
 	session_start();
 
+	if (!isset($_SESSION['user_id']))
+	{
+		errPwMsg("먼저 로그인을 진행해주세요.");
+	}
+
 	//이 아래의 코드는 페이징을 위한 게시글 갯수 카운팅 및 보여줄 게시글 갯수 설정
 	if (isset($_GET['page']))
 		$page = $_GET['page'];
@@ -86,7 +91,8 @@
 			<?php } ?>
 		</nav>
 	</header>
-	<table>
+	<div class="board_title"><a href="./BoardList.php">게시판</a></div>
+	<table class="tboard">
 		<thead>
 			<tr>
 				<th width=70>번호</th>
@@ -116,7 +122,7 @@
 			?>
 			<tr>
 				<td><?php echo $row['num']; ?></td>
-				<td><a href="viewBoard.php?num=<?=$row['num']?>"><?php echo $out; ?></a></td>
+				<td><a href="viewBoard.php?num=<?=$row['num']?>" style="text-decoration: none; color: black"><?php echo $out; ?></a></td>
 				<td><?php echo $row['user_id']; ?></td>
 				<td><?php echo $row['written']; ?></td>
 				<td><?php echo $row['hit']; ?></td>
@@ -129,8 +135,8 @@
 			<?php } ?>
 		</tbody>
 	</table>
-	<div>
-		<a href="./writeBoard.php">글쓰기</a>
+	<div class='btn btn-secondary'>
+		<a style="text-decoration: none; color: white" href="./writeBoard.php">글쓰기</a>
 	</div>
 	<!-- 페이징 코드 부분 -->
 	<div class="bottom">

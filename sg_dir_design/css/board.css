@@ -1,15 +1,27 @@
-/* table 
-{
-	border: 1px #a39485 solid;
-	font-size: .9em;
-	box-shadow: 0 2px 5px rgba(0,0,0,.25);
-	width: 100%;
-	border-collapse: collapse;
-	border-radius: 5px;
-	overflow: hidden;
-} */
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 
-table
+body a
+{
+	text-decoration: none;
+}
+
+.head
+{
+	margin-left: 5%;
+	font-family: 'Jeju Gothic';
+	font-size: 2rem;
+}
+
+.board_title a
+{
+	text-decoration: none;
+	color: black;
+	font-size: 40px;
+	font-family: 'Jeju Gothic';
+	margin-left: 5%;
+}
+
+.tboard
 {
 	border: 1px #a39485 solid;
 	box-shadow: 0 2px 5px rgba(0,0,0,.25);
@@ -17,12 +29,221 @@ table
 	max-width: 90%;
 	height: 320px;
 	border-collapse: collapse;
-	/* border: 1px solid #38678f; */
 	margin: 50px auto;
 	background: white;
+}
+
+.tboard tr th {
+	background-color: cornflowerblue;
+	color: #fff;
+}
+
+.tboard tr {
+	border-bottom: 1px solid #eee;
+}
+.tboard tr:last-child {
+	border: none;
+}
+
+.tboard tr:nth-child(odd) {
+	background-color: rgba(221, 221, 221, 0.338);
 }
 
 .bottom
 {
 	text-align: center;
+}
+
+/* section 태그 */
+section
+{
+	margin: 50px 50px 50px 50px;
+	font-family: 'Jeju Gothic';
+	overflow: auto;
+}
+
+.view_title
+{
+	padding: 0.5rem 0.75rem;
+	font-size: 1.1rem;
+	border-bottom: 1px solid;
+	background-color: #f0f0f0;
+}
+
+.view_info
+{
+	padding: 0.35rem 0.75rem 0.3rem;
+	border-bottom: 1px solid;
+}
+
+.view_member
+{
+	display: inline-block;
+	font-size: .9rem;
+}
+
+.view_attr
+{
+	display: inline-block;
+	float: right;
+	font-size: .8rem;
+	line-height: 1.4rem;
+}
+
+.view_attr .s_body
+{
+	background-color: #eee;
+}
+
+/* 게시글 내용 부분 */
+
+.viewContent
+{
+	max-width: 100%;
+	padding: 0.8rem;
+	/*
+		break-all 속성값은 어절이 유지되지 않고 끊어져서 줄바꿈된다.
+	*/
+	word-break: break-all;
+	/*
+		overflow 넘칠경우 스크롤바가 자동으로 생깁니다. 가로/세로 필요한 부분에만 생깁니다.
+	*/
+	overflow-x: auto;
+}
+
+.img
+{
+	display: block;
+	margin: auto;
+}
+
+.liked
+{
+	margin: 2rem 0 0.5rem;
+	text-align: center;
+	clear: both;
+}
+
+.like
+{
+	width: 100px;
+	height: 50px;
+	display: inline-block;
+}
+
+#likeUp
+{
+	margin-right: 5px;
+}
+
+#likeDown
+{
+	margin-left: 5px;
+}
+
+.file
+{
+	border-top: 1px solid;
+	border-color: #ddd;
+	padding: 1rem;
+}
+
+.underMenu
+{
+	text-align: right;
+	font-size: 1rem;
+	padding: 0.5rem 0.75rem;
+	border-top: 1px solid;
+	border-color: #ddd;
+}
+
+.modify
+{
+	background-color: gray;
+	padding: 0.5rem;
+	color: white;
+}
+
+.delete
+{
+	background-color: rgb(228, 69, 69);
+	padding: 0.5rem;
+	color: white;
+}
+
+.goList
+{
+	background-color: gray;
+	padding: 0.5rem;
+	color: white;
+}
+
+/* 글쓰기 스타일 */
+.write_head
+{
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	border-color: #bbb;
+	padding: 0.5rem 0.75rem;
+	margin-bottom: 1rem;
+	margin-top: 1rem;
+	font-size: 2rem;
+}
+
+.title_group
+{
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.title_group_front
+{
+	display: flex;
+}
+
+.title_group_text
+{
+	padding: 0.25rem 0.5rem;
+	font-size: 2rem;
+	line-height: 1.5;
+	border-radius: 0;
+	text-align: center;
+	background-color: #eee;
+	border: 1px solid #ced4da;
+}
+
+.title_input
+{
+	padding: 0.25rem 0.5rem;
+	font-size: 2rem;
+	line-height: 1.5;
+	border-radius: 0;
+	position: relative;
+	flex: 1 1 auto;
+	border: 1px solid #ced4da;
+}
+
+.write_button_wrapper
+{
+	position: absolute;
+	right: 0;
+	justify-content: flex-end;
+	padding-bottom: 0.5em;
+	padding-right: 0.5em;
+	margin-top: 1rem;
+}
+
+.write_edit_button
+{
+	padding: 0.25em 1.5em;
+	border: 1px solid;
+	border-color: #bbb;
+	background-color: #fff;
+	border-radius: 4px;
+	color: #000;
+	transition-duration: .3s;
 }

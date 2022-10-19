@@ -1,44 +1,155 @@
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+body
+{
+	font-family: 'Jeju Gothic';
+}
+
 /* 댓글 */
 /* html id 는 #을, class는 . 으로 지정! */
 .reply_view {
-	width: 900px;
-	margin-top: 100px; 
+	max-width: 100%;
 	word-break: break-all;
+	padding: 0.75rem;
 }
+
+.reply_title
+{
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	border-color: #bbb;
+	padding: 0.5rem 0.75rem;
+	font-size: 1.2rem;
+}
+
 .reply_log {
+	box-sizing: border-box;
 	font-size: 14px;
-	padding: 10px 0 15px 0;
-	border-bottom: solid 1px gray;
+	margin-bottom: 0.9rem;
+	word-break: break-all;
+	border: 1px solid;
+	border-color: #bbb;
 }
+
+.reply_top
+{
+	padding: 0.2rem 0.5rem;
+	border-bottom: 1px dashed;
+	border-color: #bbb;
+	font-size: .85rem;
+	overflow: hidden;
+	background-color: #eee;
+}
+
+.reply_writer
+{
+	box-sizing: border-box;
+}
+
+.reply_right
+{
+	float: right;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.reply_right .sep::before
+{
+	content: '|';
+	font-size: 1.1em;
+	font-weight: 300;
+	margin: 0 0.5em;
+	line-height: .9em;
+}
+
 .dap_to {
 	margin-top:5px;
+	padding: 0.5rem;
+	position: relative;
+	overflow: hidden;
 }
 .rep_me {
 	font-size:12px;
 }
+
+.reply_edit_form
+{
+	margin: 1em 0 1em 2em;
+}
+
+.reply_edit_container
+{
+	position: relative;
+	border: 1px solid;
+	border-color: #bbb;
+	border-radius: 5px;
+	color: #000;
+}
+
+.reply_edit_info
+{
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid;
+	border-color: #bbb;
+	overflow: hidden;
+	padding: 0.5em;
+	flex-grow: 1;
+}
+
+.reply_edit_textarea_wrapper
+{
+	position: relative;
+	padding: 0.5em 0.5em 0;
+}
+
+.reply_edit_textarea
+{
+	border: none;
+	width: 100%;
+	height: 100%;
+	min-height: 4em;
+	overflow: hidden;
+	resize: none;
+	background-color: transparent;
+}
+
+.reply_edit_button_wrapper
+{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	justify-content: flex-end;
+	padding-bottom: 0.5em;
+	padding-right: 0.5em;
+}
+
+.reply_edit_button
+{
+	padding: 0.25em 1.5em;
+	border: 1px solid;
+	border-color: #bbb;
+	background-color: #fff;
+	border-radius: 4px;
+	color: #000;
+	transition-duration: .3s;
+}
+
 #reply_edit {
 	display:none;
 }
 #reply_delete {
 	display:none;
 }	
-.reply_write {
-	margin-top: 50px;
+.reply_edit_form.reply_write 
+{
+	padding: 0 0.75em;
+	margin-left: 0;
 }
-#reply_content {
-	width: 700px;
-	height: 56px; 
-}
-.rp_bt {
-	position: absolute;
-	width:100px;
-	height:56px;
-	font-size:16px;
-	margin-left: 10px; 
-}
+
 .viewContent img{
-    margin-top: 20px;
-    width: 80%;
+	margin-top: 20px;
+	width: 80%;
 }
 /* main 페이지 공통 */
 body, div {
