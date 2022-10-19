@@ -2,6 +2,11 @@
 	require_once('../php/db_con.php');
 	session_start();
 
+	if (!isset($_SESSION['user_id']))
+	{
+		errPwMsg("먼저 로그인을 진행해주세요.");
+	}
+
 	//이 아래의 코드는 페이징을 위한 게시글 갯수 카운팅 및 보여줄 게시글 갯수 설정
 	if (isset($_GET['page']))
 		$page = $_GET['page'];

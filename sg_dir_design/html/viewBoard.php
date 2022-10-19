@@ -2,6 +2,11 @@
 	require_once('../php/db_con.php');
 	session_start();
 
+	if (!isset($_SESSION['user_id']))
+	{
+		errPwMsg("먼저 로그인을 진행해주세요.");
+	}
+
 	$num = $_GET['num'];
 	// $sql = "
 	// 	SELECT * FROM board WHERE num='$num'
