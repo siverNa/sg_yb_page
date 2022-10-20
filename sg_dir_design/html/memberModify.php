@@ -23,7 +23,7 @@
 		<header>
 			<nav class="nav-container">
 			<div style="width: 100px;"></div>
-			<img src="../img/kakao.png" alt="logo" style="width: 30px;">
+			<img src="../img/logoCat.png" alt="logo" style="width: 30px;">
 			<div class="nav-item"><a href="./main.php" style="text-decoration: none; color: white">SG YB page</a></div>
 				<?php if (!isset($_SESSION['user_id'])) { ?>
 					<div style="flex-grow: 1;"></div>
