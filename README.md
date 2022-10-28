@@ -25,7 +25,7 @@ This is a collaboration project to create a bulletin board between SG and yb.
       <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white">
   
 2. 사용한 도구
-	- <img src="https://img.shields.io/badge/VSCode-007ACC?style=flat&logo=Visual-Studio-Code&logoColor=white"> 등
+	- <img src="https://img.shields.io/badge/Visual%20Studio%20Code-007ACC?style=flat&logo=Visual%20Studio%20Code&logoColor=white"> 등
  
 3. 사용한 협업 툴
 	- <img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white">, 
