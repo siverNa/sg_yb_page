@@ -14,14 +14,22 @@ This is a collaboration project to create a bulletin board between SG and yb.
   
 # 스택
 1. 사용한 언어
-   - sg : PHP(PHP 7.4, DotHome 호스팅 기준), HTML5, CSS, Javascript, MySql
-   - yb : 
+   - sg :
+      <img src="https://img.shields.io/badge/PHP-777BB4?style=flat&logo=PHP&logoColor=white"> 
+      (PHP 7.4, DotHome 호스팅 기준), 
+      <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white"> , 
+      <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white">, 
+      <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white">, 
+      <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white">
+   - yb : <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=white"> , 
+      <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white">
   
 2. 사용한 도구
-	- Vscode 등
+	- <img src="https://img.shields.io/badge/VSCode-007ACC?style=flat&logo=Visual-Studio-Code&logoColor=white"> 등
  
 3. 사용한 협업 툴
-	- Github, Notion 등
+	- <img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white">, 
+      <a href="https://viridian-attempt-8cf.notion.site/8971f1c3b4ee4e82b62052f5c059346a"><img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white"></a> 등
 
 4. 사용한 오픈소스
 	- Summernote : https://summernote.org/
